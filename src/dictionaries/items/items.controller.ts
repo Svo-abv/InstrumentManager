@@ -9,7 +9,7 @@ export class ItemsController {
 
     @ApiOperation({ summary: "Получить список всей номенклатуры" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.itemsService.getAll();
     }
 }
