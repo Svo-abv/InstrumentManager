@@ -14,7 +14,8 @@ import { UsersModule } from 'src/dictionaries/users/users.module';
 import { Warehouses } from 'src/dictionaries/warehouses/schemas/warehouses.entity';
 import { WarehousesModule } from 'src/dictionaries/warehouses/warehouses.module';
 import { DocumentPaymentModule } from 'src/documents/documentpayment/documentPayment.module';
-import { DocumentPayment } from 'src/documents/documentpayment/schemas/documentstock.entity';
+import { DocumentPaymentRows } from 'src/documents/documentpayment/documentpaymentrows/schemas/documentpaymentrows.entity';
+import { DocumentPayment } from 'src/documents/documentpayment/schemas/documentpayment.entity';
 import { DocumentStatus } from 'src/documents/documentstatus/schemas/documentstatus.entity';
 import { DocumentstockModule } from 'src/documents/documentstock/documentstock.module';
 import { DocumentStockRows } from 'src/documents/documentstock/documentstockrows/schemas/documentstockrows.entity';
@@ -40,7 +41,8 @@ import { AppService } from './app.service';
       username: process.env.DB_LOGIN,
       password: process.env.DB_PWD,
       database: process.env.DB_NAME,
-      entities: [Users, Units, Items, Warehouses, Clients, Organizations, DocumentTypes, DocumentStatus, DocumentStock, DocumentPayment, DocumentStockRows],
+      entities: [Users, Units, Items, Warehouses, Clients, Organizations, DocumentTypes, DocumentStatus, DocumentStock,
+        DocumentStockRows, DocumentPayment, DocumentPaymentRows],
       synchronize: true,
     }),
 

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { DocumentStock } from "src/documents/documentstock/schemas/documentstock.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Warehouses {
@@ -10,4 +11,7 @@ export class Warehouses {
 
     @Column()
     addresse: string;
+
+    @OneToMany(type => DocumentStock, doc => doc.warehouseId)
+    doc: DocumentStock[];
 }
