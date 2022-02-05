@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
-import { Users } from './schemas/users.entity';
+import { Units } from './schemas/units.entity';
 
 @Injectable()
-export class UsersService {
+export class UnitsService {
     constructor(
-        @InjectRepository(Users)
-        private usersRepository: Repository<Users>,) { }
+        @InjectRepository(Units)
+        private unitsRepository: Repository<Units>,) { }
 }

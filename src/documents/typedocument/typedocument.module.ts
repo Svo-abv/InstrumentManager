@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TypedocumentService } from './typedocument.service';
+import { TypeDocumentService } from './typedocument.service';
+import { TypeDocumentController } from './typedocument.controller';
 
 @Module({
-  providers: [TypedocumentService]
+  providers: [TypeDocumentService],
+  controllers: [TypeDocumentController]
 })
-export class TypedocumentModule {}
+export class TypeDocumentModule { }
