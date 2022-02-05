@@ -8,4 +8,8 @@ export class UsersService {
     constructor(
         @InjectRepository(Users)
         private usersRepository: Repository<Users>,) { }
+
+    async getAll(): Promise<Users[]> {
+        return this.usersRepository.find();
+    }
 }

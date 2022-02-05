@@ -1,4 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { DocumentStockService } from './documentstock.service';
 
+@ApiTags("Документ движения")
 @Controller('documentstock')
-export class DocumentstockController {}
+export class DocumentStockController {
+    constructor(private documentStockService: DocumentStockService) { }
+
+    @ApiOperation({ summary: "Список документов движения" })
+    @Get()
+    getAll() {
+        return this.documentStockService.getAll();
+    }
+
+
+}

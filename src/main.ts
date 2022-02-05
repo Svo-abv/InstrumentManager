@@ -9,11 +9,10 @@ async function startApp() {
     .setTitle('Менеджер инструментов')
     .setDescription('Система учета хранения и аренды инструментов')
     .setVersion('0.1')
-    .addTag('cats')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/help', app, document);
+  SwaggerModule.setup('manual', app, document);
 
-  await app.listen(5000).then(() => console.log('server started, at:'));
+  await app.listen(process.env.SERVER_API_PORT || 5001).then(() => console.log(`server started, at: ${process.env.SERVER_API_PORT || 5001} port`));
 }
 startApp();

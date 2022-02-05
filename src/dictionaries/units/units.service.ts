@@ -8,4 +8,8 @@ export class UnitsService {
     constructor(
         @InjectRepository(Units)
         private unitsRepository: Repository<Units>,) { }
+
+    async getAll(): Promise<Units[]> {
+        return this.unitsRepository.find();
+    }
 }

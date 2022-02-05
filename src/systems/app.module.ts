@@ -16,10 +16,12 @@ import { WarehousesModule } from 'src/dictionaries/warehouses/warehouses.module'
 import { DocumentPaymentModule } from 'src/documents/documentpayment/documentPayment.module';
 import { DocumentPaymentRows } from 'src/documents/documentpayment/documentpaymentrows/schemas/documentpaymentrows.entity';
 import { DocumentPayment } from 'src/documents/documentpayment/schemas/documentpayment.entity';
+import { DocumentStatusModule } from 'src/documents/documentstatus/documentstatus.module';
 import { DocumentStatus } from 'src/documents/documentstatus/schemas/documentstatus.entity';
-import { DocumentstockModule } from 'src/documents/documentstock/documentstock.module';
+import { DocumentStockModule } from 'src/documents/documentstock/documentstock.module';
 import { DocumentStockRows } from 'src/documents/documentstock/documentstockrows/schemas/documentstockrows.entity';
 import { DocumentStock } from 'src/documents/documentstock/schemas/documentstock.entity';
+import { DocumentTypesModule } from 'src/documents/documenttypes/documenttypes.module';
 import { DocumentTypes } from 'src/documents/documenttypes/schemas/documenttypes.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -32,7 +34,8 @@ import { AppService } from './app.service';
     UsersModule, ClientsModule,
     ItemsModule, OrganizationsModule,
     WarehousesModule, DocumentPaymentModule,
-    DocumentstockModule, UnitsModule,
+    DocumentStockModule, UnitsModule,
+    DocumentStatusModule, DocumentTypesModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',

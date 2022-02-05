@@ -1,4 +1,15 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ItemsService } from './items.service';
 
+@ApiTags("Справочник номенклатуры")
 @Controller('items')
-export class ItemsController {}
+export class ItemsController {
+    constructor(private itemsService: ItemsService) { }
+
+    @ApiOperation({ summary: "Получить список всей номенклатуры" })
+    @Get()
+    getAll() {
+        return this.itemsService.getAll();
+    }
+}
