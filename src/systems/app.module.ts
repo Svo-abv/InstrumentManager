@@ -25,10 +25,19 @@ import { DocumentTypesModule } from 'src/documents/documenttypes/documenttypes.m
 import { DocumentTypes } from 'src/documents/documenttypes/schemas/documenttypes.entity';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { CheckAuthGuard } from './guards/checkauth.guards';
+import { SetMetadata } from "@nestjs/common";
 
 @Module({
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide: APP_GUARD,
+      useClass: CheckAuthGuard,
+
+    },],
 
   imports: [
     UsersModule, ClientsModule,
@@ -48,6 +57,7 @@ import { AppService } from './app.service';
         DocumentStockRows, DocumentPayment, DocumentPaymentRows],
       synchronize: true,
     }),
+    AuthModule,
 
   ],
 })

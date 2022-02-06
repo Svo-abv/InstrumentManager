@@ -9,6 +9,6 @@ export class ItemsService {
     private itemsRepository: Repository<Items>) { }
 
     async getAll(): Promise<Items[]> {
-        return this.itemsRepository.find();
+        return await this.itemsRepository.find();
     }
 }

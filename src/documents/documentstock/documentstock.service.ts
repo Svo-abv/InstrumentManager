@@ -9,6 +9,6 @@ export class DocumentStockService {
     private documentStockPrepository: Repository<DocumentStock>) { }
 
     async getAll(): Promise<DocumentStock[]> {
-        return this.documentStockPrepository.find();
+        return await this.documentStockPrepository.find();
     }
 }

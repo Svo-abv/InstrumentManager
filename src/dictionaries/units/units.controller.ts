@@ -10,7 +10,7 @@ export class UnitsController {
 
     @ApiOperation({ summary: "Получить список единиц измерения" })
     @Get()
-    getAllUsers() {
+    async getAllUsers() {
 
         return this.unitsService.getAll();
     }

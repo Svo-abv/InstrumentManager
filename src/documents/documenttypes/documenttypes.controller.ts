@@ -9,7 +9,7 @@ export class DocumentTypesController {
 
     @ApiOperation({ summary: "Список всех видов операций" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.documentTypeService.getAll();
     }
 }

@@ -9,6 +9,6 @@ export class OrganizationsService {
     private organizationRepository: Repository<Organizations>) { }
 
     async getAll(): Promise<Organizations[]> {
-        return this.organizationRepository.find();
+        return await this.organizationRepository.find();
     }
 }

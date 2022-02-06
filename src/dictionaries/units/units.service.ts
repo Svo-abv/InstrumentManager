@@ -10,6 +10,6 @@ export class UnitsService {
         private unitsRepository: Repository<Units>,) { }
 
     async getAll(): Promise<Units[]> {
-        return this.unitsRepository.find();
+        return await this.unitsRepository.find();
     }
 }

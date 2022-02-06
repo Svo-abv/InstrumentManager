@@ -9,7 +9,7 @@ export class DocumentStatusController {
 
     @ApiOperation({ summary: "Список всех статусов документов" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.documentStatusService.getAll();
     }
 }

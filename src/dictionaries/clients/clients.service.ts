@@ -9,7 +9,7 @@ export class ClientsService {
         @InjectRepository(Clients)
         private clientsRepository: Repository<Clients>,) { }
 
-    getAll(): Promise<Clients[]> {
-        return this.clientsRepository.find();
+    async getAll(): Promise<Clients[]> {
+        return await this.clientsRepository.find();
     }
 }

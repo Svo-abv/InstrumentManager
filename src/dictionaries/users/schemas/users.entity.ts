@@ -6,10 +6,13 @@ export class Users {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     name: string;
 
     @Column()
+    password: string;
+
+    @Column({ default: "USER" })
     role: string;
 
     @OneToMany(type => DocumentStock, doc => doc.userId)

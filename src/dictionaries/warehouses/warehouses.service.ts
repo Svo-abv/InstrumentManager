@@ -10,6 +10,6 @@ export class WarehousesService {
     private warehousesRepository: Repository<Warehouses>) { }
 
     async getAll(): Promise<Warehouses[]> {
-        return this.warehousesRepository.find();
+        return await this.warehousesRepository.find();
     }
 }

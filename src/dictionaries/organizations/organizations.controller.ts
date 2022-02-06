@@ -9,7 +9,7 @@ export class OrganizationsController {
 
     @ApiOperation({ summary: "Получить список всех организаций" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.organizationService.getAll()
     }
 }

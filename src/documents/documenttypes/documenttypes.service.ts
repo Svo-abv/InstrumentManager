@@ -10,6 +10,6 @@ export class DocumentTypesService {
     private documentsTypeRepository: Repository<DocumentTypes>) { }
 
     async getAll(): Promise<DocumentTypes[]> {
-        return this.documentsTypeRepository.find();
+        return await this.documentsTypeRepository.find();
     }
 }

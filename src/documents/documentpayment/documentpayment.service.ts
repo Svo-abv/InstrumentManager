@@ -10,6 +10,6 @@ export class DocumentPaymentService {
     private documentPaymentRepository: Repository<DocumentPayment>) { }
 
     async getAll(): Promise<DocumentPayment[]> {
-        return this.documentPaymentRepository.find();
+        return await this.documentPaymentRepository.find();
     }
 }

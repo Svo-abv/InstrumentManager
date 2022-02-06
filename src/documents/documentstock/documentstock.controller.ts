@@ -9,7 +9,7 @@ export class DocumentStockController {
 
     @ApiOperation({ summary: "Список документов движения" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.documentStockService.getAll();
     }
 

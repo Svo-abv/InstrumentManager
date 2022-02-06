@@ -9,7 +9,7 @@ export class DocumentpaymentController {
 
     @ApiOperation({ summary: "Список всех платежных документов" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.documentPaymentService.getAll();
     }
 }

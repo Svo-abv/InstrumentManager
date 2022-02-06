@@ -10,6 +10,6 @@ export class DocumentStatusService {
     private documentStatusRepository: Repository<DocumentStatus>) { }
 
     async getAll(): Promise<DocumentStatus[]> {
-        return this.documentStatusRepository.find();
+        return await this.documentStatusRepository.find();
     }
 }

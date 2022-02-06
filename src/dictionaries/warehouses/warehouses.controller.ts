@@ -9,7 +9,7 @@ export class WarehousesController {
 
     @ApiOperation({ summary: "Список всех складов" })
     @Get()
-    getAll() {
+    async getAll() {
         return this.warehouseService.getAll();
     }
 }
