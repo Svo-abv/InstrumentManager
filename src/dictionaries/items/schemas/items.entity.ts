@@ -17,7 +17,7 @@ export class Items {
     unitId: number;
 
     @ManyToOne(type => Units, unit => unit.id)
-    unit: Units[];
+    unit: Units;
 
 
     @OneToMany(type => DocumentStockRows, doc => doc.itemId)

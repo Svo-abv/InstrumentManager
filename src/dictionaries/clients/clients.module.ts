@@ -1,4 +1,4 @@
-import { Get, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { ClientsController } from './clients.controller';
 import { Clients } from './schemas/clients.entity';
@@ -11,9 +11,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 })
 export class ClientsModule {
   constructor(private clientsService: ClientsService) { }
-
-  @Get()
-  getAll() {
-    return this.clientsService.getAll();
-  }
 }

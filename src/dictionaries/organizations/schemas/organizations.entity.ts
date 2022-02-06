@@ -10,10 +10,10 @@ export class Organizations {
     name: string;
 
     @Column()
-    inn: string;
+    inn: number;
 
     @Column()
-    ikpp: string;
+    ikpp: number;
 
     @Column()
     address: string;

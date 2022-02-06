@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
+import { CreateDocPaymentDto } from './dto/documentspyment.dto';
 import { DocumentPayment } from './schemas/documentpayment.entity';
 
 @Injectable()
@@ -11,5 +12,25 @@ export class DocumentPaymentService {
 
     async getAll(): Promise<DocumentPayment[]> {
         return await this.documentPaymentRepository.find();
+    }
+
+    async getById(id: string): Promise<DocumentPayment> {
+
+        return await this.documentPaymentRepository.findOne(id);
+    }
+
+    async delete(id: string): Promise<DeleteResult> {
+
+        return await this.documentPaymentRepository.delete(id);
+    }
+
+    async create(dto: CreateDocPaymentDto): Promise<DocumentPayment> {
+
+        return await this.documentPaymentRepository.save(dto);
+    }
+
+    async update(dto: CreateDocPaymentDto): Promise<DocumentPayment> {
+
+        return await this.documentPaymentRepository.save(dto);
     }
 }

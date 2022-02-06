@@ -25,9 +25,6 @@ export class DocumentPayment {
     typeId: number;
 
     @Column()
-    warehouseId: number;
-
-    @Column()
     organizationId: number;
 
     @Column()
@@ -44,21 +41,21 @@ export class DocumentPayment {
     comment: String;
 
     @ManyToOne(type => DocumentStatus, status => status.id)
-    status: DocumentStatus[];
+    status: DocumentStatus;
 
     @ManyToOne(type => DocumentTypes, type => type.id)
-    type: DocumentTypes[];
+    type: DocumentTypes;
 
     @ManyToOne(type => Organizations, organization => organization.id)
-    organization: Organizations[];
+    organization: Organizations;
 
     @ManyToOne(type => Clients, client => client.id)
-    client: Clients[];
+    client: Clients;
 
     @ManyToOne(type => Users, user => user.id)
-    user: Users[];
+    user: Users;
 
-    @OneToMany(type => DocumentPaymentRows, doc => doc.documentId)
-    doc: DocumentPaymentRows[];
+    @OneToMany(type => DocumentPaymentRows, rows => rows.document)
+    docs: DocumentPaymentRows[];
 
 }

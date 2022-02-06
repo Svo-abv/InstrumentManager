@@ -44,24 +44,24 @@ export class DocumentStock {
     comment: String;
 
     @ManyToOne(type => DocumentStatus, status => status.id)
-    status: DocumentStatus[];
+    status: DocumentStatus;
 
     @ManyToOne(type => DocumentTypes, type => type.id)
-    type: DocumentTypes[];
+    type: DocumentTypes;
 
     @ManyToOne(type => Warehouses, warehouse => warehouse.id)
-    warehouse: Warehouses[];
+    warehouse: Warehouses;
 
     @ManyToOne(type => Organizations, organization => organization.id)
-    organization: Organizations[];
+    organization: Organizations;
 
     @ManyToOne(type => Clients, client => client.id)
-    client: Clients[];
+    client: Clients;
 
     @ManyToOne(type => Users, user => user.id)
-    user: Users[];
+    user: Users;
 
-    @OneToMany(type => DocumentStockRows, doc => doc.documentId)
+    @OneToMany(type => DocumentStockRows, rows => rows.document)
     doc: DocumentStockRows[];
 
-}
+} 

@@ -7,12 +7,9 @@ export class DocumentPaymentRows {
     id: number;
 
     @Column()
-    documentId: number;
-
-    @Column()
     summ: number;
 
-    @ManyToOne(type => DocumentPayment, doc => doc.id)
-    doc: DocumentPayment[];
+    @ManyToOne(type => DocumentPayment, doc => doc.docs)
+    document: DocumentPayment;
 
 }
