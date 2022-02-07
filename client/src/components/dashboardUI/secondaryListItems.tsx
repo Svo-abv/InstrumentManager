@@ -11,6 +11,9 @@ import ItemsList from '../dictionaryUI/ItemsList';
 import UnitsList from '../dictionaryUI/UnitsList';
 import DocumentTypesList from '../documentUI/DocumentTypesList';
 import DocumentStatusList from '../documentUI/DocumentStatusList';
+import AssessmentRoundedIcon from '@mui/icons-material/AssessmentRounded';
+import BatchPredictionRoundedIcon from '@mui/icons-material/BatchPredictionRounded';
+
 import { observer } from 'mobx-react';
 
 const SecondaryListItems = observer(() => {
@@ -33,14 +36,14 @@ const SecondaryListItems = observer(() => {
             <ListSubheader inset>Дополнительно</ListSubheader>
             <ListItemButton onClick={handleClickReports}>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <AssessmentRoundedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Отчеты" />
                 {openReports ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <ListItemButton onClick={handleClickDictionary}>
                 <ListItemIcon>
-                    <BarChartIcon />
+                    <BatchPredictionRoundedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Справочники" />
                 {openDictionary ? <ExpandLess /> : <ExpandMore />}

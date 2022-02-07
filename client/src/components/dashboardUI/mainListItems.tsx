@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import { observer } from 'mobx-react';
 import { Context } from '../..';
 import DocumentPymentList from '../documentUI/DocumentPymentList';
@@ -38,7 +38,7 @@ const MainListItems = observer(() => {
             <ListItemButton
                 onClick={(event) => handleClickDocuments()}>
                 <ListItemIcon>
-                    <ShoppingCartIcon />
+                    <ArticleRoundedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Документы" />
                 {openDocuments ? <ExpandLess /> : <ExpandMore />}

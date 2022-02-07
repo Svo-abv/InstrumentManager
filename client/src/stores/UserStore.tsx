@@ -10,8 +10,8 @@ export interface IUser {
 
 class UserStore {
 
-    _isAuth: boolean = false;
-    _user: any = { name: '' };
+    private _isAuth: boolean = false;
+    private _user: any = { name: '' };
 
     constructor() {
         makeAutoObservable(this);

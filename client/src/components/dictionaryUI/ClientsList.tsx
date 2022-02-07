@@ -25,10 +25,22 @@ const ClientsList = () => {
 
     }, []);
 
+    const editHandler = () => {
+
+    }
+    const addHandler = () => {
+
+    }
+
+    const deleteHandler = () => {
+
+
+    }
+
     return (
         <div style={{ height: "auto" }} >
             <Typography variant="h4" gutterBottom component="div">Клиенты</Typography>
-            <ActionsPanel />
+            <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={deleteHandler} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid
                     style={{ height: window.innerHeight - 300, width: '100%', marginTop: 5 }}

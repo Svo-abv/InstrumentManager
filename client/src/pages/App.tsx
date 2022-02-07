@@ -9,6 +9,7 @@ import { checkApi } from '../httpApi/UserApi';
 import Auth from './Auth';
 import Panel from './Panel';
 import { observer } from 'mobx-react';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 const mdTheme = createTheme();
 
@@ -26,17 +27,18 @@ const App = observer(() => {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <CssBaseline enableColorScheme />
-      {
-        loading ? <SpinnerItem top={'150px'} /> :
-          (<BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Auth />} />
-              <Route path="/panel" element={<Panel />} />
-            </Routes>
-          </BrowserRouter>)
-      }
-
+      <SnackbarProvider maxSnack={3}>
+        <CssBaseline enableColorScheme />
+        {
+          loading ? <SpinnerItem top={'150px'} /> :
+            (<BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Auth />} />
+                <Route path="/panel" element={<Panel />} />
+              </Routes>
+            </BrowserRouter>)
+        }
+      </SnackbarProvider>
     </ThemeProvider>
   );
 });
