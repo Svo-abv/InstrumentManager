@@ -2,18 +2,27 @@ import { Box, TextField, FormControlLabel, Checkbox, Button, Grid } from '@mui/m
 import React from 'react';
 import Link from '@mui/material/Link';
 import Copyright from '../Copyright';
+import { loginApi } from '../../httpApi/UserApi';
+import { useNavigate } from 'react-router-dom';
+import AlertDialog from '../AlertDialog';
 
 const FormSignIn = () => {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const navi = useNavigate();
+    const [open, setOpen] = React.useState(false);
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+        try {
+            await loginApi(String(data.get('email')), String(data.get('password')));
+            navi("/panel");
+        } catch (e: any) {
+            setOpen(true);
+        }
     };
-    return (
+    return (<div>
+        <AlertDialog open={open} setOpen={setOpen} />
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
                 margin="normal"
@@ -56,6 +65,7 @@ const FormSignIn = () => {
             </Grid>
             <Copyright sx={{ mt: 5 }} />
         </Box>
+    </div>
     );
 };
 
