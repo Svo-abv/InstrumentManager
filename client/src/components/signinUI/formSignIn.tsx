@@ -1,13 +1,17 @@
 import { Box, TextField, FormControlLabel, Checkbox, Button, Grid } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from '@mui/material/Link';
 import Copyright from '../Copyright';
 import { loginApi } from '../../httpApi/UserApi';
 import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../AlertDialog';
+import { Context } from '../..';
+import jwtDecode from 'jwt-decode';
 
 const FormSignIn = () => {
     const navi = useNavigate();
+    const { user } = useContext(Context);
+
     const [open, setOpen] = React.useState(false);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -15,7 +19,9 @@ const FormSignIn = () => {
         const data = new FormData(event.currentTarget);
 
         try {
-            await loginApi(String(data.get('email')), String(data.get('password')));
+            const d = await loginApi(String(data.get('email')), String(data.get('password')));
+            user.user = jwtDecode(d);
+            user.isAuth = true;
             navi("/panel");
         } catch (e: any) {
             setOpen(true);

@@ -17,15 +17,13 @@ const App = observer(() => {
   const { user } = React.useContext(Context);
 
   const [loading, setLoading] = React.useState(true);
-
   React.useEffect(() => {
-    localStorage.getItem("jwtHash") && checkApi().then((data) => {
-      localStorage.setItem("jwtHash", data);
+    checkApi().then((data) => {
       user.user = jwtDecode(data);
       user.isAuth = true;
     }).finally(() => setLoading(false));
-    //setLoading(false);
   }, []);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <CssBaseline enableColorScheme />

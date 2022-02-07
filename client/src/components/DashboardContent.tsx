@@ -6,10 +6,10 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import LeftBar from './dashboardUI/LeftBar';
 import Copyright from './Copyright';
-import ActionsPanel from './ActionsPanel';
 import DocumentStockList from './documentUI/DocumentStockList';
+import { observer } from 'mobx-react';
 
-const DashboardContent = () => {
+const DashboardContent = observer(() => {
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -39,6 +39,6 @@ const DashboardContent = () => {
             </Box>
         </Box>
     );
-}
+})
 
 export default DashboardContent;

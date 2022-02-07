@@ -68,6 +68,7 @@ const LeftBar = observer(() => {
 
     const navi = useNavigate();
     const { user } = React.useContext(Context);
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
