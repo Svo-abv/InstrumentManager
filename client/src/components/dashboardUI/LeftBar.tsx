@@ -2,12 +2,11 @@ import * as React from 'react';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
-import { Toolbar, IconButton, Typography, Badge, Divider, List, Menu, MenuItem } from '@mui/material';
+import { Toolbar, IconButton, Typography, Divider, Menu, MenuItem } from '@mui/material';
 import MainListItems from './mainListItems';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import SecondaryListItems from './secondaryListItems';
 import { AccountCircle } from '@mui/icons-material';
 import { Context } from '../..';
@@ -64,6 +63,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+// interface ILeftBar {
+//     current: JSX.Element;
+//     setCurrent: React.Dispatch<React.SetStateAction<JSX.Element>>;
+// }
+
 const LeftBar = observer(() => {
 
     const navi = useNavigate();
@@ -118,11 +122,11 @@ const LeftBar = observer(() => {
                     >
                         Панель
                     </Typography>
-                    <IconButton color="inherit">
+                    {/* <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
                         </Badge>
-                    </IconButton>
+                    </IconButton> */}
                     {user.isAuth && (<div>
                         <IconButton
                             size="large"

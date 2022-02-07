@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import React from 'react';
-import DashboardContent from '../components/DashboardContent';
+import DashboardContent from '../components/dashboardUI/DashboardContent';
 
 const Panel = observer(() => {
     return (

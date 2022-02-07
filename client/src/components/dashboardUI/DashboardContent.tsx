@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import LeftBar from './dashboardUI/LeftBar';
-import Copyright from './Copyright';
-import DocumentStockList from './documentUI/DocumentStockList';
+import LeftBar from './LeftBar';
+import Copyright from '../Copyright';
+import DocumentStockList from '../documentUI/DocumentStockList';
 import { observer } from 'mobx-react';
+import { Context } from '../..';
 
 const DashboardContent = observer(() => {
-
+    /// const [currentView, setCurrentView] = useState(<DocumentStockList />);
+    const { currElement } = useContext(Context);
     return (
         <Box sx={{ display: 'flex' }}>
             <LeftBar />
@@ -30,7 +32,7 @@ const DashboardContent = observer(() => {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                <DocumentStockList />
+                                {currElement.element}
                             </Paper>
                         </Grid>
                     </Grid>

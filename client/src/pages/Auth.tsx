@@ -10,11 +10,13 @@ const Auth = observer(() => {
 
     const navi = useNavigate();
 
-    //   useEffect(() => {
-    if (user.isAuth) {
-        navi("/panel");
-    }
-    //    });
+    useEffect(() => {
+        if (user.isAuth) {
+            navi("/panel");
+        }
+
+    }, [])
+
 
     return (
         <SignInSide />

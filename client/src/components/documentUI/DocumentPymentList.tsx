@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ActionsPanel from '../ActionsPanel';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Typography } from '@mui/material';
-import { getAllDocStockApi } from '../../httpApi/DocumentStockApi';
+import { GridColDef, DataGrid } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { getAllDocPaymentsApi } from '../../httpApi/DocumentPaymentApi';
+import ActionsPanel from '../ActionsPanel';
 import SpinnerItem from '../SpinnerItem';
 
 const columns: GridColDef[] = [
@@ -10,7 +10,6 @@ const columns: GridColDef[] = [
     { field: 'statusId', headerName: 'Статус', width: 100 },
     { field: 'date', type: "date", headerName: 'Дата', width: 100 },
     { field: 'typeId', headerName: 'Тип', width: 100 },
-    { field: 'warehouseId', headerName: 'Склад', width: 100 },
     { field: 'organizationId', headerName: 'Организация', width: 200 },
     { field: 'clientId', headerName: 'Клиент', width: 200 },
     { field: 'userId', headerName: 'Пользователь', width: 200 },
@@ -18,13 +17,13 @@ const columns: GridColDef[] = [
     { field: 'comment', headerName: 'Комментарий', width: 250 },
 ];
 
-const DocumentStockList = () => {
+const DocumentPymentList = () => {
     const [rows, setRows] = useState<any>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
-        getAllDocStockApi().then((data) => {
+        getAllDocPaymentsApi().then((data) => {
             setRows(data);
             setLoading(false);
         });
@@ -48,4 +47,4 @@ const DocumentStockList = () => {
     );
 };
 
-export default DocumentStockList;
+export default DocumentPymentList;

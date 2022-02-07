@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import { observer } from 'mobx-react';
+import { Context } from '../..';
+import DocumentPymentList from '../documentUI/DocumentPymentList';
+import DocumentStockList from '../documentUI/DocumentStockList';
 
-
-const MainListItems = () => {
+const MainListItems = observer(() => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [openDocuments, setOpenDocuments] = useState(false);
+
+    const { currElement } = useContext(Context);
 
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -41,14 +46,20 @@ const MainListItems = () => {
             <Collapse in={openDocuments} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItemButton sx={{ pl: 4 }} selected={selectedIndex === 1}
-                        onClick={(event) => handleListItemClick(event, 1)}>
+                        onClick={(event) => {
+                            handleListItemClick(event, 1);
+                            currElement.element = <DocumentStockList />;
+                        }}>
                         <ListItemIcon>
                             <StarBorder />
                         </ListItemIcon>
                         <ListItemText primary="Движения" />
                     </ListItemButton>
                     <ListItemButton sx={{ pl: 4 }} selected={selectedIndex === 2}
-                        onClick={(event) => handleListItemClick(event, 2)}>
+                        onClick={(event) => {
+                            handleListItemClick(event, 2);
+                            currElement.element = <DocumentPymentList />;
+                        }}>
                         <ListItemIcon>
                             <StarBorder />
                         </ListItemIcon>
@@ -58,6 +69,6 @@ const MainListItems = () => {
             </Collapse>
         </List>
     );
-};
+});
 
 export default MainListItems;

@@ -1,9 +1,11 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
-
-const SpinnerItem = () => {
+interface ISpinnerItem {
+    top: string;
+}
+const SpinnerItem = (props: ISpinnerItem) => {
     return (
-        <div style={{ top: '150px', width: '100px', height: '200px', position: 'relative', margin: '0 auto' }}>
+        <div style={{ top: props.top, width: '100px', height: '200px', position: 'relative', margin: '0 auto' }}>
             <CircularProgress />
         </div>
     );

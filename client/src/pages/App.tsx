@@ -28,7 +28,7 @@ const App = observer(() => {
     <ThemeProvider theme={mdTheme}>
       <CssBaseline enableColorScheme />
       {
-        loading ? <SpinnerItem /> :
+        loading ? <SpinnerItem top={'150px'} /> :
           (<BrowserRouter>
             <Routes>
               <Route path="/" element={<Auth />} />
