@@ -1,14 +1,13 @@
 import { CssBaseline } from '@mui/material';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Auth from './Auth';
 import Panel from './Panel';
 
 const mdTheme = createTheme();
 
-
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={mdTheme}>
       <CssBaseline enableColorScheme />

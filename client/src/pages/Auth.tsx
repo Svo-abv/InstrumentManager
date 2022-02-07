@@ -1,10 +1,9 @@
 import React from 'react';
+import SignInSide from '../components/SignInSide';
 
 const Auth = () => {
     return (
-        <div>
-
-        </div>
+        <SignInSide />
     );
 };
 

@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
 import * as React from 'react';
+import { Typography } from '@mui/material';
 import { Link } from '@mui/material';
 
 function Copyright(props: any) {
@@ -7,7 +7,7 @@ function Copyright(props: any) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                Менеджер инструментов
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
