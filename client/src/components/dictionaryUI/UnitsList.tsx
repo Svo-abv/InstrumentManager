@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { GridColDef, DataGrid, GridRowParams, MuiEvent, GridCallbackDetails } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
-import { deleteByIdApi, getAllUnitsApi } from '../../httpApi/UnitsApi';
+import { createUnitApi, deleteByIdApi, getAllUnitsApi, updateByIdApi } from '../../httpApi/UnitsApi';
 import ActionsPanel from '../ActionsPanel';
 import DeleteAlertDialog from '../DeleteAlertDialog';
 import SpinnerItem from '../SpinnerItem';
@@ -26,17 +26,16 @@ const UnitsList = () => {
     const [editFormIsOpen, setEditFormIsOpen] = useState(false);
     const [isEditOperation, setIsEditOperation] = useState(false);
 
-    const [operationComplete, setOperationComplete] = useState("i"); // i - initial, s- success, e-error
-
+    const [operationComplete, setOperationComplete] = useState(false); // i - initial, s- success, e-error
+    const [errorComplete, setErrorComplete] = useState(false); // i - initial, s- success, e-error
 
     useEffect(() => {
-        if (operationComplete === "s")
-            enqueueSnackbar('Операция выполнена успешно!', { variant: 'success' });
-        else if (operationComplete !== "i")
-            enqueueSnackbar('Ошибка, не удачно!', { variant: 'error' });
-
+        enqueueSnackbar('Операция выполнена успешно!', { variant: 'success' });
     }, [enqueueSnackbar, operationComplete]);
 
+    useEffect(() => {
+        enqueueSnackbar('Ошибка, не удачно!', { variant: 'error' });
+    }, [enqueueSnackbar, errorComplete]);
     useEffect(() => {
 
         getAllUnitsApi().then((data) => {
@@ -46,14 +45,11 @@ const UnitsList = () => {
 
     }, []);
 
-
-
     const getRowIdGetter = (params: GridRowParams, event: MuiEvent<React.MouseEvent>, details: GridCallbackDetails) => {
         console.log(params.id);
         setCurrRow(params.id.toString());
 
     }
-
     const editHandler = () => {
         setEditFormIsOpen(true);
         setIsEditOperation(true);
@@ -67,34 +63,31 @@ const UnitsList = () => {
     const alertAccept = () => {
 
         setAlertIsOpen(false);
-        setOperationComplete("e");
         setLoading(true);
 
         deleteByIdApi(currRow).then(() => {
             getAllUnitsApi().then((data) => {
                 setRows(data)
-                setOperationComplete("s");
-            })
-        }).finally(() => {
-            setLoading(false);
-        });
+                setOperationComplete(!operationComplete);
+            });
+        }, () => setErrorComplete(!errorComplete)).finally(() => setLoading(false));
 
     };
-    const editAccept = () => {
+    const editAccept = async (d: any) => {
 
-        // setAlertIsOpen(false);
-        // setOperationComplete("e");
-        // setLoading(true);
+        setEditFormIsOpen(false);
+        setLoading(true);
 
-        // deleteByIdApi(currRow).then(() => {
-        //     getAllUnitsApi().then((data) => {
-        //         setRows(data)
-        //         setOperationComplete("s");
-        //     })
-        // }).finally(() => {
-        //     setLoading(false);
-        // });
+        !isEditOperation && delete d.id;
 
+        (isEditOperation ? updateByIdApi(d) : createUnitApi(d)).then(() => {
+            getAllUnitsApi().then((data: any) => {
+                setRows(data)
+                setOperationComplete(!operationComplete);
+            });
+        }, () => setErrorComplete(!errorComplete)).finally(() => {
+            setLoading(false);
+        });
     };
 
     console.log("Rendering....");
@@ -112,7 +105,7 @@ const UnitsList = () => {
                 />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAccept} />)}
-            {editFormIsOpen && (<UnitsEditForm isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAccept} />)}
+            {editFormIsOpen && (<UnitsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAccept} />)}
         </div >
     );
 };
