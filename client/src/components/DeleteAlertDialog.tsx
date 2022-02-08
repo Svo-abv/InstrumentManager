@@ -1,13 +1,8 @@
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
 import React from 'react';
+import { IDialog } from '../types/types';
 
-interface IDeleteAlerDialog {
-    isOpen: boolean;
-    //handleClouse: ((event: {}, reason: "backdropClick" | "escapeKeyDown") => void) | undefined;
-    handleClouse: React.MouseEventHandler<HTMLButtonElement>;
-    handleAccept: React.MouseEventHandler<HTMLButtonElement>;
-}
-const DeleteAlerDialog = (props: IDeleteAlerDialog) => {
+const DeleteAlertDialog = (props: IDialog) => {
     return (
         <div>
             <Dialog
@@ -33,4 +28,4 @@ const DeleteAlerDialog = (props: IDeleteAlerDialog) => {
     );
 };
 
-export default DeleteAlerDialog;
+export default DeleteAlertDialog;

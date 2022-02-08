@@ -3,9 +3,10 @@ import { GridColDef, DataGrid, GridRowParams, MuiEvent, GridCallbackDetails } fr
 import React, { useEffect, useState } from 'react';
 import { deleteByIdApi, getAllUnitsApi } from '../../httpApi/UnitsApi';
 import ActionsPanel from '../ActionsPanel';
-import DeleteAlerDialog from '../DeleteAlerDialog';
+import DeleteAlertDialog from '../DeleteAlertDialog';
 import SpinnerItem from '../SpinnerItem';
 import { useSnackbar } from 'notistack';
+import UnitsEditForm from './UnitsEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Номер', width: 100 },
@@ -20,8 +21,12 @@ const UnitsList = () => {
     const [rows, setRows] = useState<any>();
     const [loading, setLoading] = useState(true);
     const [currRow, setCurrRow] = useState("");
+
     const [alertIsOpen, setAlertIsOpen] = useState(false);
-    const [operationComplete, setOperationComplete] = useState("i");
+    const [editFormIsOpen, setEditFormIsOpen] = useState(false);
+    const [isEditOperation, setIsEditOperation] = useState(false);
+
+    const [operationComplete, setOperationComplete] = useState("i"); // i - initial, s- success, e-error
 
 
     useEffect(() => {
@@ -50,11 +55,15 @@ const UnitsList = () => {
     }
 
     const editHandler = () => {
+        setEditFormIsOpen(true);
+        setIsEditOperation(true);
 
     }
     const addHandler = () => {
-
+        setEditFormIsOpen(true);
+        setIsEditOperation(false);
     }
+
     const alertAccept = () => {
 
         setAlertIsOpen(false);
@@ -71,10 +80,26 @@ const UnitsList = () => {
         });
 
     };
+    const editAccept = () => {
+
+        // setAlertIsOpen(false);
+        // setOperationComplete("e");
+        // setLoading(true);
+
+        // deleteByIdApi(currRow).then(() => {
+        //     getAllUnitsApi().then((data) => {
+        //         setRows(data)
+        //         setOperationComplete("s");
+        //     })
+        // }).finally(() => {
+        //     setLoading(false);
+        // });
+
+    };
+
     console.log("Rendering....");
     return (
         <div style={{ height: "auto" }} >
-            <DeleteAlerDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAccept} />
             <Typography variant="h4" gutterBottom component="div">Единицы измерения</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
@@ -86,6 +111,8 @@ const UnitsList = () => {
                     rowsPerPageOptions={[5]}
                 />)
             }
+            {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAccept} />)}
+            {editFormIsOpen && (<UnitsEditForm isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAccept} />)}
         </div >
     );
 };
