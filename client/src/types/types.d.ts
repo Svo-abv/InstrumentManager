@@ -1,6 +1,16 @@
+import React from "react";
+
 export interface IDialog {
     isOpen: boolean;
     handleClouse: React.MouseEventHandler<HTMLButtonElement>;
     handleAccept: React.MouseEventHandler<HTMLButtonElement>;
-    isEdit?: boolean;
+
+}
+
+export interface IEditDialog {
+    isOpen: boolean;
+    handleClouse: React.MouseEventHandler<HTMLButtonElement>;
+    handleAccept: React.Dispatch<any>;
+    isEdit: boolean;
+    id?: string | false;
 }

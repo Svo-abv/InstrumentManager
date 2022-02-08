@@ -24,7 +24,7 @@ const AlertDialog = (props: IAlertDialog) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => props.setOpen(false)} autoFocus>
+                    <Button onClick={() => props.setOpen(false)} autoFocus color="success">
                         ok
                     </Button>
                 </DialogActions>

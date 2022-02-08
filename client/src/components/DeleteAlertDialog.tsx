@@ -21,7 +21,7 @@ const DeleteAlertDialog = (props: IDialog) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.handleClouse}>Нет</Button>
-                    <Button onClick={props.handleAccept} autoFocus>Да</Button>
+                    <Button onClick={props.handleAccept} autoFocus color="success">Да</Button>
                 </DialogActions>
             </Dialog>
         </div>
