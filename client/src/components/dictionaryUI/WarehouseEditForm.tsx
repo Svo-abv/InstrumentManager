@@ -1,23 +1,23 @@
 import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { getOneUnitsApi } from '../../httpApi/UnitsApi';
+import { getOneWarehousesApi } from '../../httpApi/WarehousesApi';
 import { IEditDialog } from '../../types/types';
 
 
-const UnitsEditForm = (props: IEditDialog) => {
+const WarehouseEditForm = (props: IEditDialog) => {
 
-    const [currData, setCurrData] = useState({ name: "" });
+    const [currData, setCurrData] = useState({ name: "", address: "" });
 
     useEffect(() => {
         if (props.id && props.isEdit)
-            getOneUnitsApi(props.id).then((data) =>
+            getOneWarehousesApi(props.id).then((data) =>
                 setCurrData(data));
 
     }, []);
 
     return (
         <div>
-            <Dialog open={props.isOpen} hideBackdrop>
+            <Dialog open={props.isOpen} hideBackdrop >
                 <DialogTitle>{props.isEdit ? "Редактировать" : "Создать"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -25,6 +25,10 @@ const UnitsEditForm = (props: IEditDialog) => {
                     <TextField
                         value={currData.name} onChange={(e) => setCurrData({ ...currData, name: e.currentTarget.value })} required autoFocus margin="dense" id="name"
                         label="Наименование" type="text" fullWidth variant="standard"
+                    />
+                    <TextField
+                        value={currData.address} onChange={(e) => setCurrData({ ...currData, address: e.currentTarget.value })} margin="dense" id="address"
+                        label="Адрес" type="text" fullWidth variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
@@ -36,4 +40,4 @@ const UnitsEditForm = (props: IEditDialog) => {
     );
 };
 
-export default UnitsEditForm;
+export default WarehouseEditForm;

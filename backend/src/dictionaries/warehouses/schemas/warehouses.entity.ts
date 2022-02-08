@@ -10,7 +10,7 @@ export class Warehouses {
     name: string;
 
     @Column()
-    addresse: string;
+    address: string;
 
     @OneToMany(type => DocumentStock, doc => doc.warehouseId)
     doc: DocumentStock[];

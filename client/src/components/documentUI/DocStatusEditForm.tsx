@@ -1,16 +1,16 @@
 import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { getOneUnitsApi } from '../../httpApi/UnitsApi';
+import { getOneDocStatusApi } from '../../httpApi/DocumentStatusApi';
 import { IEditDialog } from '../../types/types';
 
 
-const UnitsEditForm = (props: IEditDialog) => {
+const DocStatusEditForm = (props: IEditDialog) => {
 
     const [currData, setCurrData] = useState({ name: "" });
 
     useEffect(() => {
         if (props.id && props.isEdit)
-            getOneUnitsApi(props.id).then((data) =>
+            getOneDocStatusApi(props.id).then((data) =>
                 setCurrData(data));
 
     }, []);
@@ -36,4 +36,4 @@ const UnitsEditForm = (props: IEditDialog) => {
     );
 };
 
-export default UnitsEditForm;
+export default DocStatusEditForm;

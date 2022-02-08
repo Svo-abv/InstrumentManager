@@ -11,17 +11,17 @@ export const getOneUnitsApi = async (id: string) => {
 }
 
 
-export const deleteByIdApi = async (id: string) => {
+export const deleteUnitsByIdApi = async (id: string) => {
     const { data } = await $authHost.delete(`units/${id}`, { timeout: 2000 });
     return data;
 }
 
-export const updateByIdApi = async (d: any) => {
+export const updateUnitsByIdApi = async (d: any) => {
     const { data } = await $authHost.post(`units/update`, d, { timeout: 2000 });
     return data;
 }
 
-export const createUnitApi = async (d: any) => {
+export const createUnitsApi = async (d: any) => {
     const { data } = await $authHost.post(`units/create`, d, { timeout: 2000 });
     return data;
 }
