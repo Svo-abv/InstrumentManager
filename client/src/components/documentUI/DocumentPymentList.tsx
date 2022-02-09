@@ -9,16 +9,16 @@ import SpinnerItem from '../SpinnerItem';
 import DocPaymentsEditForm from './DocPaymentsEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Код', width: 100 },
-    { field: 'num', headerName: 'Номер', width: 100 },
-    { field: 'status', headerName: 'Статус', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
-    { field: 'date', type: "date", headerName: 'Дата', width: 100 },
-    { field: 'type', headerName: 'Тип', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
-    { field: 'organization', headerName: 'Организация', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
-    { field: 'client', headerName: 'Клиент', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
-    { field: 'user', headerName: 'Пользователь', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
-    { field: 'summ', type: "number", headerName: 'Сумма', width: 100 },
-    { field: 'comment', headerName: 'Комментарий', width: 250 },
+    { field: 'id', headerName: 'Код', minWidth: 100 },
+    { field: 'num', headerName: 'Номер', minWidth: 100 },
+    { field: 'status', headerName: 'Статус', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
+    { field: 'date', type: "date", headerName: 'Дата', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${new Date(params.row.date).toLocaleString()}` || '') },
+    { field: 'type', headerName: 'Тип', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
+    { field: 'organization', headerName: 'Организация', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
+    { field: 'client', headerName: 'Клиент', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
+    { field: 'user', headerName: 'Пользователь', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
+    { field: 'summ', type: "number", headerName: 'Сумма', minWidth: 100 },
+    { field: 'comment', headerName: 'Комментарий', minWidth: 250 },
 ];
 
 const DocumentPymentList = () => {

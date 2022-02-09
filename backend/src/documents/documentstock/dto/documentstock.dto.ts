@@ -3,7 +3,7 @@ export class CreateDocStockDto {
     id?: number;
     statusId: number;
     num: string;
-    date: number;
+    date: Date;
     typeId: number;
     warehouseId: number;
     organizationId: number;

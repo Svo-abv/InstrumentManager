@@ -19,7 +19,7 @@ export class DocumentPayment {
     num: string;
 
     @Column({ type: 'datetime' })
-    date: number;
+    date: string;
 
     @Column()
     typeId: number;

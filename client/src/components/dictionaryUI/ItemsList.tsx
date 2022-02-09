@@ -9,10 +9,10 @@ import SpinnerItem from '../SpinnerItem';
 import ItemsEditForm from './ItemsEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Номер', width: 100 },
-    { field: 'name', headerName: 'Наименование', width: 250 },
-    { field: 'img', headerName: 'Изображение', width: 250 },
-    { field: 'unit', headerName: 'Единицы измерения', width: 110, valueGetter: (params: GridValueGetterParams) => (`${params.row.unit.name}` || '') }
+    { field: 'id', headerName: 'Номер', minWidth: 100 },
+    { field: 'name', headerName: 'Наименование', minWidth: 250 },
+    { field: 'img', headerName: 'Изображение', minWidth: 250 },
+    { field: 'unit', headerName: 'Единицы измерения', minWidth: 110, valueGetter: (params: GridValueGetterParams) => (`${params.row.unit.name}` || '') }
 ];
 
 const ItemsList = () => {

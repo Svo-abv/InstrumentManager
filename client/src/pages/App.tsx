@@ -9,7 +9,9 @@ import { checkApi } from '../httpApi/UserApi';
 import Auth from './Auth';
 import Panel from './Panel';
 import { observer } from 'mobx-react';
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const mdTheme = createTheme();
 

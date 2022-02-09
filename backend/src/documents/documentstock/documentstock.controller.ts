@@ -28,6 +28,11 @@ export class DocumentStockController {
         return this.documentStockService.delete(id);
     }
 
+    // @Get("/createblunk")
+    // createBlunk(@Param() id: string) {
+    //     return this.documentStockService.createBlunk();
+    // }
+
     @Post("/create")
     create(@Body() dto: CreateDocStockDto) {
         return this.documentStockService.create(dto);

@@ -4,7 +4,7 @@ import { Users } from "src/dictionaries/users/schemas/users.entity";
 import { Warehouses } from "src/dictionaries/warehouses/schemas/warehouses.entity";
 import { DocumentStatus } from "src/documents/documentstatus/schemas/documentstatus.entity";
 import { DocumentTypes } from "src/documents/documenttypes/schemas/documenttypes.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DatabaseType, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { DocumentStockRows } from "../documentstockrows/schemas/documentstockrows.entity";
 
 @Entity()
@@ -18,8 +18,8 @@ export class DocumentStock {
     @Column()
     num: string;
 
-    @Column({ type: 'datetime' })
-    date: number;
+    @Column({ type: 'timestamp' })
+    date: Date;
 
     @Column()
     typeId: number;
@@ -61,7 +61,7 @@ export class DocumentStock {
     @ManyToOne(type => Users, user => user.id)
     user: Users;
 
-    @OneToMany(type => DocumentStockRows, rows => rows.document)
+    @OneToMany(type => DocumentStockRows, rows => rows.documentId)
     doc: DocumentStockRows[];
 
 } 

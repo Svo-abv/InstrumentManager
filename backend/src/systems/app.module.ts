@@ -29,6 +29,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { CheckAuthGuard } from './guards/checkauth.guards';
 import { SetMetadata } from "@nestjs/common";
+import { DocumentStockRowsModule } from 'src/documents/documentstock/documentstockrows/documentstockrows.module';
 
 @Module({
   controllers: [AppController],
@@ -45,6 +46,7 @@ import { SetMetadata } from "@nestjs/common";
     WarehousesModule, DocumentPaymentModule,
     DocumentStockModule, UnitsModule,
     DocumentStatusModule, DocumentTypesModule,
+    DocumentStockRowsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',

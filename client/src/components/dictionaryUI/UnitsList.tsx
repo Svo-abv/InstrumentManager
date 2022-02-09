@@ -9,8 +9,8 @@ import { useSnackbar } from 'notistack';
 import UnitsEditForm from './UnitsEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Номер', width: 100 },
-    { field: 'name', headerName: 'Наименование', width: 250 }
+    { field: 'id', headerName: 'Номер', minWidth: 100 },
+    { field: 'name', headerName: 'Наименование', minWidth: 250 }
 ];
 
 const UnitsList = () => {

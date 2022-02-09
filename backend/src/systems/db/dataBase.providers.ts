@@ -13,7 +13,7 @@ export const databaseProviders = [
             password: process.env.DB_PWD,
             database: process.env.DB_NAME,
             entities: [Users,],
-            synchronize: true,
+            synchronize: true
         }),
     },
 ];

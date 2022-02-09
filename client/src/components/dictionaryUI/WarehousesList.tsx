@@ -9,9 +9,9 @@ import SpinnerItem from '../SpinnerItem';
 import WarehouseEditForm from './WarehouseEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Номер', width: 100 },
-    { field: 'name', headerName: 'Наименование', width: 250 },
-    { field: 'address', headerName: 'Адрес', width: 250 }
+    { field: 'id', headerName: 'Номер', minWidth: 100 },
+    { field: 'name', headerName: 'Наименование', minWidth: 250 },
+    { field: 'address', headerName: 'Адрес', minWidth: 250 }
 
 ];
 

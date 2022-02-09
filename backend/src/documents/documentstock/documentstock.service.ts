@@ -23,6 +23,10 @@ export class DocumentStockService {
         return await this.documentStockPrepository.delete(id);
     }
 
+    // async createBlunk(): Promise<DocumentStock> {
+    //     return await this.documentStockPrepository.save();
+    // }
+
     async create(dto: CreateDocStockDto): Promise<DocumentStock> {
 
         return await this.documentStockPrepository.save(dto);
