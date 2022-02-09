@@ -14,3 +14,8 @@ export interface IEditDialog {
     isEdit: boolean;
     id?: string | false;
 }
+
+export interface IMenuElements {
+    name: string;
+    element: JSX.Element;
+}

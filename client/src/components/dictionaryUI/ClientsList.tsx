@@ -85,7 +85,8 @@ const ClientsList = () => {
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
-            {editFormIsOpen && (<ClientsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
+            {editFormIsOpen && (<ClientsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation}
+                handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
         </div >
     );
 };

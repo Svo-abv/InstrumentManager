@@ -5,8 +5,8 @@ import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import { observer } from 'mobx-react';
 import { Context } from '../..';
-import DocumentPymentList from '../documentUI/DocumentPymentList';
-import DocumentStockList from '../documentUI/DocumentStockList';
+import { documentsMenuElements } from '../../utils/constants';
+import { IMenuElements } from '../../types/types';
 
 const MainListItems = observer(() => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -45,26 +45,20 @@ const MainListItems = observer(() => {
             </ListItemButton>
             <Collapse in={openDocuments} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} selected={selectedIndex === 1}
-                        onClick={(event) => {
-                            handleListItemClick(event, 1);
-                            currElement.element = <DocumentStockList />;
-                        }}>
-                        <ListItemIcon>
-                            <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary="Движения" />
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} selected={selectedIndex === 2}
-                        onClick={(event) => {
-                            handleListItemClick(event, 2);
-                            currElement.element = <DocumentPymentList />;
-                        }}>
-                        <ListItemIcon>
-                            <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary="Платежы" />
-                    </ListItemButton>
+                    {
+                        documentsMenuElements.map((item: IMenuElements, itr) => (
+                            <ListItemButton key={item.name} sx={{ pl: 4 }} selected={selectedIndex === itr}
+                                onClick={(event) => {
+                                    handleListItemClick(event, itr);
+                                    currElement.element = item.element;
+                                }}>
+                                <ListItemIcon>
+                                    <StarBorder />
+                                </ListItemIcon>
+                                <ListItemText primary={item.name} />
+                            </ListItemButton>
+                        ))
+                    }
                 </List>
             </Collapse>
         </List>
