@@ -6,7 +6,7 @@ import { IEditDialog } from '../../types/types';
 
 const OrgEditForm = (props: IEditDialog) => {
 
-    const [currData, setCurrData] = useState({ name: "" });
+    const [currData, setCurrData] = useState({ name: "", address: "", inn: 0, kpp: 0 });
 
     useEffect(() => {
         if (props.id && props.isEdit)
@@ -24,7 +24,19 @@ const OrgEditForm = (props: IEditDialog) => {
                     </DialogContentText>
                     <TextField
                         value={currData.name} onChange={(e) => setCurrData({ ...currData, name: e.currentTarget.value })} required autoFocus margin="dense" id="name"
-                        label="Наименование" type="text" fullWidth variant="standard"
+                        label="Наименование" type="text" fullWidth
+                    />
+                    <TextField sx={{ mr: 2 }}
+                        value={currData.inn} onChange={(e) => setCurrData({ ...currData, inn: Number(e.currentTarget.value) })} autoFocus margin="normal" id="inn"
+                        label="ИНН" type="text"
+                    />
+                    <TextField
+                        value={currData.kpp} onChange={(e) => setCurrData({ ...currData, kpp: Number(e.currentTarget.value) })} autoFocus margin="normal" id="kpp"
+                        label="КПП" type="text"
+                    />
+                    <TextField
+                        value={currData.address} onChange={(e) => setCurrData({ ...currData, address: e.currentTarget.value })} autoFocus margin="dense" id="address"
+                        label="Адрес" type="text" fullWidth
                     />
                 </DialogContent>
                 <DialogActions>

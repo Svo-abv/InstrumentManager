@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { GridColDef, DataGrid, GridCallbackDetails, GridRowParams, MuiEvent } from '@mui/x-data-grid';
+import { GridColDef, DataGrid, GridCallbackDetails, GridRowParams, MuiEvent, GridValueGetterParams } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { createDocPaymentsApi, deleteDocPaymentsByIdApi, getAllDocPaymentsApi, updateDocPaymentsByIdApi } from '../../httpApi/DocumentPaymentApi';
@@ -10,12 +10,13 @@ import DocPaymentsEditForm from './DocPaymentsEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Код', width: 100 },
-    { field: 'statusId', headerName: 'Статус', width: 100 },
+    { field: 'num', headerName: 'Номер', width: 100 },
+    { field: 'status', headerName: 'Статус', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
     { field: 'date', type: "date", headerName: 'Дата', width: 100 },
-    { field: 'typeId', headerName: 'Тип', width: 100 },
-    { field: 'organizationId', headerName: 'Организация', width: 200 },
-    { field: 'clientId', headerName: 'Клиент', width: 200 },
-    { field: 'userId', headerName: 'Пользователь', width: 200 },
+    { field: 'type', headerName: 'Тип', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
+    { field: 'organization', headerName: 'Организация', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
+    { field: 'client', headerName: 'Клиент', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
+    { field: 'user', headerName: 'Пользователь', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
     { field: 'summ', type: "number", headerName: 'Сумма', width: 100 },
     { field: 'comment', headerName: 'Комментарий', width: 250 },
 ];
@@ -86,7 +87,7 @@ const DocumentPymentList = () => {
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
-                    style={{ height: window.innerHeight - 300, width: '100%', marginTop: 5 }}
+                    autoHeight style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}

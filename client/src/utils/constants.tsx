@@ -1,6 +1,7 @@
 import ClientsList from "../components/dictionaryUI/ClientsList";
 import ItemsList from "../components/dictionaryUI/ItemsList";
 import OrganizationList from "../components/dictionaryUI/OrganizationList";
+import UnitsList from "../components/dictionaryUI/UnitsList";
 import WarehousesList from "../components/dictionaryUI/WarehousesList";
 import DocumentPymentList from "../components/documentUI/DocumentPymentList";
 import DocumentStatusList from "../components/documentUI/DocumentStatusList";
@@ -18,7 +19,7 @@ export const dictionaryMenuElements: IMenuElements[] = [
     { name: "Клиенты", element: <ClientsList /> },
     { name: "Склады", element: <WarehousesList /> },
     { name: "Номенклатура", element: <ItemsList /> },
-    { name: "Единицы измерения", element: <DocumentTypesList /> },
+    { name: "Единицы измерения", element: <UnitsList /> },
     { name: "Виды операций", element: <DocumentTypesList /> },
     { name: "Статусы документов", element: <DocumentStatusList /> },
 ];

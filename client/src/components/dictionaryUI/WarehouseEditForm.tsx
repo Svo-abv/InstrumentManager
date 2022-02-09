@@ -24,11 +24,11 @@ const WarehouseEditForm = (props: IEditDialog) => {
                     </DialogContentText>
                     <TextField
                         value={currData.name} onChange={(e) => setCurrData({ ...currData, name: e.currentTarget.value })} required autoFocus margin="dense" id="name"
-                        label="Наименование" type="text" fullWidth variant="standard"
+                        label="Наименование" type="text" fullWidth
                     />
                     <TextField
                         value={currData.address} onChange={(e) => setCurrData({ ...currData, address: e.currentTarget.value })} margin="dense" id="address"
-                        label="Адрес" type="text" fullWidth variant="standard"
+                        label="Адрес" type="text" fullWidth
                     />
                 </DialogContent>
                 <DialogActions>

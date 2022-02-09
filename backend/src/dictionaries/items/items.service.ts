@@ -11,7 +11,7 @@ export class ItemsService {
     private itemsRepository: Repository<Items>) { }
 
     async getAll(): Promise<Items[]> {
-        return await this.itemsRepository.find();
+        return await this.itemsRepository.find({ relations: ["unit"] });
     }
 
     async getById(id: string): Promise<Items> {

@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, MuiEvent } from '@mui/x-data-grid';
+import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
 import { createItemsApi, deleteItemsByIdApi, getAllItemsApi, updateItemsByIdApi } from '../../httpApi/ItemsApi';
@@ -12,7 +12,7 @@ const columns: GridColDef[] = [
     { field: 'id', headerName: 'Номер', width: 100 },
     { field: 'name', headerName: 'Наименование', width: 250 },
     { field: 'img', headerName: 'Изображение', width: 250 },
-    { field: 'unitId', headerName: 'Единицы измерения', width: 110 }
+    { field: 'unit', headerName: 'Единицы измерения', width: 110, valueGetter: (params: GridValueGetterParams) => (`${params.row.unit.name}` || '') }
 ];
 
 const ItemsList = () => {
@@ -81,8 +81,8 @@ const ItemsList = () => {
             <Typography variant="h4" gutterBottom component="div">Номенклатура</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
-                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
-                    style={{ height: window.innerHeight - 300, width: '100%', marginTop: 5 }}
+                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter} autoHeight
+                    style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}

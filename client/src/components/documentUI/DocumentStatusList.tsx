@@ -80,7 +80,7 @@ const DocumentStatusList = () => {
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
-                    style={{ height: window.innerHeight - 300, width: '100%', marginTop: 5 }}
+                    autoHeight style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}

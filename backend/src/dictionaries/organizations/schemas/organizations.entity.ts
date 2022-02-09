@@ -13,7 +13,7 @@ export class Organizations {
     inn: number;
 
     @Column()
-    ikpp: number;
+    kpp: number;
 
     @Column()
     address: string;

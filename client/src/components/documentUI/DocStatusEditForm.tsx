@@ -24,7 +24,7 @@ const DocStatusEditForm = (props: IEditDialog) => {
                     </DialogContentText>
                     <TextField
                         value={currData.name} onChange={(e) => setCurrData({ ...currData, name: e.currentTarget.value })} required autoFocus margin="dense" id="name"
-                        label="Наименование" type="text" fullWidth variant="standard"
+                        label="Наименование" type="text" fullWidth
                     />
                 </DialogContent>
                 <DialogActions>

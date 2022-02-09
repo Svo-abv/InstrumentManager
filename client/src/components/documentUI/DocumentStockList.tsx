@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ActionsPanel from '../ActionsPanel';
-import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, MuiEvent } from '@mui/x-data-grid';
+import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid';
 import { Typography } from '@mui/material';
 import { createDocStockApi, deleteDocStockByIdApi, getAllDocStockApi, updateDocStockByIdApi } from '../../httpApi/DocumentStockApi';
 import SpinnerItem from '../SpinnerItem';
@@ -10,13 +10,14 @@ import DocStockEditForm from './DocStockEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Код', width: 100 },
-    { field: 'statusId', headerName: 'Статус', width: 100 },
+    { field: 'num', headerName: 'Номер', width: 100 },
+    { field: 'status', headerName: 'Статус', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
     { field: 'date', type: "date", headerName: 'Дата', width: 100 },
-    { field: 'typeId', headerName: 'Тип', width: 100 },
-    { field: 'warehouseId', headerName: 'Склад', width: 100 },
-    { field: 'organizationId', headerName: 'Организация', width: 200 },
-    { field: 'clientId', headerName: 'Клиент', width: 200 },
-    { field: 'userId', headerName: 'Пользователь', width: 200 },
+    { field: 'type', headerName: 'Тип', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
+    { field: 'warehouse', headerName: 'Склад', width: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.warehouse.name}` || '') },
+    { field: 'organization', headerName: 'Организация', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
+    { field: 'client', headerName: 'Клиент', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
+    { field: 'user', headerName: 'Пользователь', width: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
     { field: 'summ', type: "number", headerName: 'Сумма', width: 100 },
     { field: 'comment', headerName: 'Комментарий', width: 250 },
 ];
@@ -88,7 +89,7 @@ const DocumentStockList = () => {
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
-                    style={{ height: window.innerHeight - 300, width: '100%', marginTop: 5 }}
+                    autoHeight style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
