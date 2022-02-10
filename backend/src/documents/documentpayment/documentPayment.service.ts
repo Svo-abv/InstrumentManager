@@ -11,7 +11,7 @@ export class DocumentPaymentService {
     private documentPaymentRepository: Repository<DocumentPayment>) { }
 
     async getAll(): Promise<DocumentPayment[]> {
-        return await this.documentPaymentRepository.find();
+        return await this.documentPaymentRepository.find({ relations: ["status", "type", "organization", "client", "user"] });
     }
 
     async getById(id: string): Promise<DocumentPayment> {

@@ -3,7 +3,7 @@ export class CreateDocPaymentDto {
     id?: number;
     statusId: number;
     num: string;
-    date: number;
+    date: string;
     typeId: number;
     organizationId: number;
     clientId: number;

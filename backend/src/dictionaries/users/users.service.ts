@@ -20,7 +20,7 @@ export class UsersService {
 
     async login(dto: RegUserDto) {
 
-        const result = await this.usersRepository.findOne({ where: { name: dto.name } });
+        const result = await this.usersRepository.findOne({ where: { email: dto.email } });
         if (!result) {
             throw new HttpException("Пользователь ненайден!", HttpStatus.BAD_REQUEST);
         }

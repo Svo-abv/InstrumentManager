@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 import { CreateDocStockDto } from './dto/documentstock.dto';
 import { DocumentStock } from './schemas/documentstock.entity';
+import { getConnection } from "typeorm";
+import { DocumentStockRows } from './documentstockrows/schemas/documentstockrows.entity';
 
 @Injectable()
 export class DocumentStockService {
@@ -10,7 +12,7 @@ export class DocumentStockService {
     private documentStockPrepository: Repository<DocumentStock>) { }
 
     async getAll(): Promise<DocumentStock[]> {
-        return await this.documentStockPrepository.find();
+        return await this.documentStockPrepository.find({ relations: ["status", "type", "warehouse", "organization", "client", "user"] });
     }
 
     async getById(id: string): Promise<DocumentStock> {
@@ -23,13 +25,32 @@ export class DocumentStockService {
         return await this.documentStockPrepository.delete(id);
     }
 
+    // async createBlunk(): Promise<DocumentStock> {
+    //     return await this.documentStockPrepository.save();
+    // }
+
     async create(dto: CreateDocStockDto): Promise<DocumentStock> {
 
-        return await this.documentStockPrepository.save(dto);
+        const Doc = this.documentStockPrepository.create(dto);
+        const summ = await getConnection()
+            .createQueryBuilder()
+            .select('IFNULL(sum(summ),0) as summ')
+            .from(DocumentStockRows, "rows")
+            .where('documentId = :id', { id: Doc.id })//.getQuery();
+            .getRawOne();
+        Doc.summ = summ.summ;
+        return await this.documentStockPrepository.save(Doc);
     }
 
     async update(dto: CreateDocStockDto): Promise<DocumentStock> {
-
-        return await this.documentStockPrepository.save(dto);
+        const Doc = this.documentStockPrepository.create(dto);
+        const summ = await getConnection()
+            .createQueryBuilder()
+            .select('IFNULL(sum(summ),0) as summ')
+            .from(DocumentStockRows, "rows")
+            .where('documentId = :id', { id: Doc.id })//.getQuery();
+            .getRawOne();
+        Doc.summ = summ.summ;
+        return await this.documentStockPrepository.save(Doc);
     }
 }

@@ -5,7 +5,7 @@ import { AppModule } from './systems/app.module';
 
 async function startApp() {
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('Менеджер инструментов')
     .setDescription('Система учета хранения и аренды инструментов')
