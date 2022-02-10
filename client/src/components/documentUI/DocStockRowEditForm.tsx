@@ -20,7 +20,7 @@ const DocStockRowEditForm = (props: IEditDialog) => {
 
     return (
         <Dialog open={props.isOpen} hideBackdrop fullWidth>
-            <DialogTitle>{props.isEdit ? "Редактировать" : "Создать"}</DialogTitle>
+            <DialogTitle>{props.isEdit ? "Редактировать" : "Добавить"}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                 </DialogContentText>

@@ -125,9 +125,7 @@ const DocStockEditForm = (props: IEditDialog) => {
                 <Button onClick={props.handleClouse}>Отмена</Button>
                 <Button onClick={() => props.handleAccept(currData)} color="success">Сохранить и закрыть</Button>
             </DialogActions>
-
             {isOpen && <DocStockRowEditForm isOpen={isOpen} id={currRow} handleAccept={editAcceptCallback} isEdit={isEditOperation} handleClouse={() => setIsOpen(false)} />}
-
         </Dialog>
     );
 };
