@@ -4,6 +4,10 @@ export const getAllDocStockRowskApi = async (id: string) => {
     const { data } = await $authHost.get(`documentstockrows/${id}`, { timeout: 5000 });
     return data;
 }
+export const geRowDocStockRowskApi = async (id: string) => {
+    const { data } = await $authHost.get(`documentstockrows/row/${id}`, { timeout: 5000 });
+    return data;
+}
 
 export const createBlunckDocStockRowApi = async (id: string) => {
     const { data } = await $authHost.get(`documentstockrows/createblunk/${id}`, { timeout: 5000 });
