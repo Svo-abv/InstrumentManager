@@ -15,6 +15,13 @@ export class DocumentStockRowsController {
         return this.documentStockRowsService.getAllByDocument(id);
     }
 
+    @Get("/row/:id")
+    async getRowById(@Param() id: number) {
+        if (!id)
+            throw new HttpException("Не задан id документа", HttpStatus.BAD_REQUEST);
+        return this.documentStockRowsService.getRowById(id);
+    }
+
     @Get("/createblunk/:id")
     async createBlunkRow(@Param() id: number) {
         if (!id)

@@ -6,7 +6,7 @@ import { Context } from '../..';
 import { getAllClientsApi } from '../../httpApi/ClietsApi';
 import { getAllDocStatusApi } from '../../httpApi/DocumentStatusApi';
 import { getOneDocStockApi } from '../../httpApi/DocumentStockApi';
-import { createBlunckDocStockRowApi, deleteDocStockRowApi, getAllDocStockRowskApi, saveAllDocStockRowsApi } from '../../httpApi/DocumentStockRowsApi';
+import { createBlunckDocStockRowApi, deleteDocStockRowApi, getAllDocStockRowskApi, saveAllDocStockRowsApi, updateDocStockRowsApi } from '../../httpApi/DocumentStockRowsApi';
 import { getAllDocTypesApi } from '../../httpApi/DocumentTypesApi';
 import { getAllOrgApi } from '../../httpApi/OrganizationsApi';
 import { getAllUserskApi } from '../../httpApi/UserApi';
@@ -19,7 +19,11 @@ import UserSelectItem from '../UserSelectItem';
 import DocStockRowEditForm from './DocStockRowEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'itemId', headerName: 'Номенклатура', minWidth: 300 },// , valueGetter:(params: GridValueGetterParams) => (`${params.row.itemId.name}` || '') 
+    {
+        field: 'item', headerName: 'Номенклатура', minWidth: 300, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.item ? `${params.row.item.name}` : '';
+        }
+    },// 
     { field: 'count', editable: true, type: "number", headerName: 'Количество', minWidth: 200 },
     { field: 'price', editable: true, type: "number", headerName: 'Цена', minWidth: 200 },
     { field: 'summ', type: "number", headerName: 'Сумма', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.price * params.row.count}` || '') },//
@@ -80,7 +84,7 @@ const DocStockEditForm = (props: IEditDialog) => {
 
         setIsOpen(false);
 
-        (isEditOperation ? saveAllDocStockRowsApi(d) : createBlunckDocStockRowApi(d)).then(() => {
+        (isEditOperation ? updateDocStockRowsApi(d) : createBlunckDocStockRowApi(d)).then(() => {
             getAllDocStockRowskApi(String(currData.id)).then((data: any) => {
                 setRows(data);
                 enqueueSnackbar('Операция выполнена успешно!', { variant: 'success' });

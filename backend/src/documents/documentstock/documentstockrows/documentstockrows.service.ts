@@ -11,7 +11,10 @@ export class DocumentStockRowsService {
     private documentStockRowsRepository: Repository<DocumentStockRows>) { }
 
     async getAllByDocument(id: number): Promise<DocumentStockRows[]> {
-        return await this.documentStockRowsRepository.find({ where: { document: id } });//, relations: ["itemId"] 
+        return await this.documentStockRowsRepository.find({ where: { document: id }, relations: ["item"] });//, relations: ["itemId"] 
+    }
+    async getRowById(id: number): Promise<DocumentStockRows> {
+        return await this.documentStockRowsRepository.findOne(id, { relations: ["item"] });//, 
     }
     async createBlunkRow(id: number): Promise<DocumentStockRows> {
 
@@ -23,7 +26,9 @@ export class DocumentStockRowsService {
         return await this.documentStockRowsRepository.delete(id);
     }
     async updateRow(data: CreateDocumentStockRowsDto): Promise<DocumentStockRows> {
-        return await this.documentStockRowsRepository.save(data);
+        const curr = this.documentStockRowsRepository.create(data);
+        curr.summ = curr.price * curr.count;
+        return await this.documentStockRowsRepository.save(curr);
     }
     async saveAllRows(data: CreateDocumentStockRowsDto[]): Promise<DocumentStockRows[]> {
         return await this.documentStockRowsRepository.save(data);

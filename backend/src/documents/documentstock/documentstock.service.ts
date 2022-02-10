@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 import { CreateDocStockDto } from './dto/documentstock.dto';
 import { DocumentStock } from './schemas/documentstock.entity';
 import { getConnection } from "typeorm";
@@ -34,12 +34,11 @@ export class DocumentStockService {
         const Doc = this.documentStockPrepository.create(dto);
         const summ = await getConnection()
             .createQueryBuilder()
-            .addSelect('sum(summ) as summ')
-            .from(DocumentStockRows, "document_stock_rows")
-            .where('documentId= :id', { id: Doc.id })
-            .getOne();
+            .select('IFNULL(sum(summ),0) as summ')
+            .from(DocumentStockRows, "rows")
+            .where('documentId = :id', { id: Doc.id })//.getQuery();
+            .getRawOne();
         Doc.summ = summ.summ;
-
         return await this.documentStockPrepository.save(Doc);
     }
 
@@ -47,10 +46,10 @@ export class DocumentStockService {
         const Doc = this.documentStockPrepository.create(dto);
         const summ = await getConnection()
             .createQueryBuilder()
-            .addSelect('sum(summ) as summ')
-            .from(DocumentStockRows, "document_stock_rows")
-            .where('documentId= :id', { id: Doc.id })
-            .getOne();
+            .select('IFNULL(sum(summ),0) as summ')
+            .from(DocumentStockRows, "rows")
+            .where('documentId = :id', { id: Doc.id })//.getQuery();
+            .getRawOne();
         Doc.summ = summ.summ;
         return await this.documentStockPrepository.save(Doc);
     }
