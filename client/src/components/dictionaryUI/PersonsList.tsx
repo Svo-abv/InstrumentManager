@@ -76,10 +76,10 @@ const PersonsList = () => {
 
     return (
         <div style={{ height: "auto" }} >
-            <Typography variant="h4" gutterBottom component="div">Физ. лица</Typography>
+            <Typography variant="h5" gutterBottom component="div">Физ. лица</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
-                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
+                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                     autoHeight style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }

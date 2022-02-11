@@ -14,7 +14,7 @@ const DataSelectItem = (props: IDataSelectItem) => {
 
     return (
         <TextField select variant="outlined"
-            value={value} onChange={(e) => onChange(e)} autoFocus margin="dense" id="unitId" sx={sx}
+            value={value} onChange={(e) => onChange(e)} autoFocus margin="dense" id="unitId" sx={{ ...sx, minWidth: 150 }}
             label={title} type="text" fullWidth={fullWidth}
         >
             {

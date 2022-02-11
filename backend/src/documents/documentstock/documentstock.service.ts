@@ -12,7 +12,7 @@ export class DocumentStockService {
     private documentStockPrepository: Repository<DocumentStock>) { }
 
     async getAll(): Promise<DocumentStock[]> {
-        return await this.documentStockPrepository.find({ relations: ["status", "type", "warehouse", "organization", "client", "user"] });
+        return await this.documentStockPrepository.find({ relations: ["status", "type", "warehouse", "organization", "client", "object", "user"] });
     }
 
     async getById(id: string): Promise<DocumentStock> {

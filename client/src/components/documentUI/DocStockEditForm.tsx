@@ -1,4 +1,5 @@
-import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, Grid } from '@mui/material';
+import { width } from '@mui/system';
 import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
 import React, { useContext, useEffect, useState } from 'react';
@@ -8,7 +9,9 @@ import { getAllDocStatusApi } from '../../httpApi/DocumentStatusApi';
 import { getOneDocStockApi } from '../../httpApi/DocumentStockApi';
 import { createBlunckDocStockRowApi, deleteDocStockRowApi, getAllDocStockRowskApi, saveAllDocStockRowsApi, updateDocStockRowsApi } from '../../httpApi/DocumentStockRowsApi';
 import { getAllDocTypesApi } from '../../httpApi/DocumentTypesApi';
+import { getAllObjectsApi } from '../../httpApi/ObjectsApi';
 import { getAllOrgApi } from '../../httpApi/OrganizationsApi';
+import { getAllPersonsApi } from '../../httpApi/PersonsApi';
 import { getAllUserskApi } from '../../httpApi/UserApi';
 import { getAllWarehousesApi } from '../../httpApi/WarehousesApi';
 import { IEditDialog } from '../../types/types';
@@ -42,7 +45,7 @@ const DocStockEditForm = (props: IEditDialog) => {
     const [currRow, setCurrRow] = useState("");
     const [currData, setCurrData] = useState({
         id: 0, num: "", statusId: 0, date: new Date().toISOString().substring(0, 19), typeId: 0, warehouseId: 0,
-        organizationId: 0, clientId: 0, userId: user.user.id, summ: 0, comment: ""
+        organizationId: 0, clientId: 0, personId: 0, objectsId: 0, userId: user.user.id, summ: 0, comment: ""
     });
 
     useEffect(() => {
@@ -100,25 +103,32 @@ const DocStockEditForm = (props: IEditDialog) => {
             <DialogContent>
                 <DialogContentText>
                 </DialogContentText>
-                <TextField value={currData.num} onChange={(e) => setCurrData({ ...currData, num: e.currentTarget.value })} sx={{ mr: 2 }}
-                    required autoFocus margin="dense" id="num" defaultValue={currData.id} label="Номер" type="text" />
-                <TextField value={currData.date} onChange={(e) => setCurrData({ ...currData, date: e.currentTarget.value })} sx={{ mr: 2 }}
-                    required autoFocus margin="dense" id="date" label="Дата" type="datetime-local" />
-
-                <DataSelectItem handlerApi={getAllDocStatusApi} value={currData.statusId} sx={{ mr: 2 }} title="Статус"
-                    onChange={(e) => setCurrData({ ...currData, statusId: Number(e.target.value) })} />
-                <DataSelectItem handlerApi={getAllDocTypesApi} value={currData.typeId} sx={{ mr: 2 }} title="Тип операции"
-                    onChange={(e) => setCurrData({ ...currData, typeId: Number(e.target.value) })} />
-                <DataSelectItem handlerApi={getAllWarehousesApi} value={currData.warehouseId} sx={{ mr: 2 }} title="Склад"
-                    onChange={(e) => setCurrData({ ...currData, warehouseId: Number(e.target.value) })} />
-                <DataSelectItem handlerApi={getAllOrgApi} value={currData.organizationId} sx={{ mr: 2 }} title="Организация"
-                    onChange={(e) => setCurrData({ ...currData, organizationId: Number(e.target.value) })} />
-                <DataSelectItem handlerApi={getAllClientsApi} value={currData.clientId} sx={{ mr: 2 }} title="Клиент"
-                    onChange={(e) => setCurrData({ ...currData, clientId: Number(e.target.value) })} />
-                <UserSelectItem handlerApi={getAllUserskApi} value={currData.userId} sx={{ mr: 2 }} title="Пользователь" />
+                <Grid>
+                    <TextField value={currData.num} onChange={(e) => setCurrData({ ...currData, num: e.currentTarget.value })} sx={{ mr: 2 }}
+                        required autoFocus margin="dense" id="num" defaultValue={currData.id} label="Номер" type="text" />
+                    <TextField value={currData.date} onChange={(e) => setCurrData({ ...currData, date: e.currentTarget.value })} sx={{ mr: 2 }}
+                        required autoFocus margin="dense" id="date" label="Дата" type="datetime-local" />
+                    <DataSelectItem handlerApi={getAllDocStatusApi} value={currData.statusId} sx={{ mr: 2 }} title="Статус"
+                        onChange={(e) => setCurrData({ ...currData, statusId: Number(e.target.value) })} />
+                    <DataSelectItem handlerApi={getAllDocTypesApi} value={currData.typeId} sx={{ mr: 2 }} title="Тип операции"
+                        onChange={(e) => setCurrData({ ...currData, typeId: Number(e.target.value) })} />
+                    <UserSelectItem handlerApi={getAllUserskApi} value={currData.userId} sx={{ mr: 2 }} title="Пользователь" />
+                </Grid>
+                <Grid>
+                    <DataSelectItem handlerApi={getAllWarehousesApi} value={currData.warehouseId} sx={{ mr: 2 }} title="Склад"
+                        onChange={(e) => setCurrData({ ...currData, warehouseId: Number(e.target.value) })} />
+                    <DataSelectItem handlerApi={getAllOrgApi} value={currData.organizationId} sx={{ mr: 2 }} title="Организация"
+                        onChange={(e) => setCurrData({ ...currData, organizationId: Number(e.target.value) })} />
+                    <DataSelectItem handlerApi={getAllClientsApi} value={currData.clientId} sx={{ mr: 2 }} title="Клиент"
+                        onChange={(e) => setCurrData({ ...currData, clientId: Number(e.target.value) })} />
+                    <DataSelectItem handlerApi={getAllObjectsApi} value={currData.objectsId} sx={{ mr: 2 }} title="Объект"
+                        onChange={(e) => setCurrData({ ...currData, objectsId: Number(e.target.value) })} />
+                    <DataSelectItem handlerApi={getAllPersonsApi} value={currData.personId} sx={{ mr: 2 }} title="Ответственный"
+                        onChange={(e) => setCurrData({ ...currData, personId: Number(e.target.value) })} />
+                </Grid>
                 <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={deleteHandler} />
                 {
-                    loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
+                    loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                         autoHeight style={{ width: '100%', marginTop: 5 }}
                         rows={rows} columns={columns} pageSize={7} rowsPerPageOptions={[5]} />)
                 }

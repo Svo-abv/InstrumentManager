@@ -11,13 +11,50 @@ import DocStockEditForm from './DocStockEditForm';
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Код', width: 70 },
     { field: 'num', headerName: 'Номер', minWidth: 100 },
-    { field: 'status', headerName: 'Статус', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
-    { field: 'date', type: "date", headerName: 'Дата', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${new Date(params.row.date).toLocaleString()}` || '') },
-    { field: 'type', headerName: 'Тип', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
-    { field: 'warehouse', headerName: 'Склад', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.warehouse.name}` || '') },
-    { field: 'organization', headerName: 'Организация', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
-    { field: 'client', headerName: 'Клиент', minWidth: 180, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
-    { field: 'user', headerName: 'Пользователь', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
+    {
+        field: 'status', headerName: 'Статус', minWidth: 100, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.status ? `${params.row.status.name}` : '';
+            //(`${params.row.status.name}` || '')
+        }
+    },
+    {
+        field: 'date', type: "date", headerName: 'Дата', minWidth: 150, valueGetter: (params: GridValueGetterParams) =>
+            (`${new Date(params.row.date).toLocaleString()}` || '')
+    },
+    {
+        field: 'type', headerName: 'Тип', minWidth: 150, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.type ? `${params.row.type.name}` : '';
+            // (`${params.row.type.name}` || '')
+        }
+    },
+    {
+        field: 'warehouse', headerName: 'Склад', minWidth: 100, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.warehouse ? `${params.row.warehouse.name}` : '';
+            //  (`${params.row.warehouse.name}` || '')
+        }
+    },
+    {
+        field: 'organization', headerName: 'Организация', minWidth: 200, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.organization ? `${params.row.organization.name}` : '';
+            //  (`${params.row.organization.name}` || '')
+        }
+    },
+    {
+        field: 'client', headerName: 'Клиент', minWidth: 180, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.client ? `${params.row.client.name}` : '';
+            // (`${params.row.client.name}` || '')
+        }
+    },
+    {
+        field: 'object', headerName: 'Объект', minWidth: 180, valueGetter: (params: GridValueGetterParams) => {
+            return params.row.object ? `${params.row.object.name}` : '';
+            //(`${params.row.object.name}` || '')
+        }
+    },
+    {
+        field: 'user', headerName: 'Пользователь', minWidth: 150, valueGetter: (params: GridValueGetterParams) =>
+            (`${params.row.user.name}` || '')
+    },
     { field: 'summ', type: "number", headerName: 'Сумма', minWidth: 100 },
     { field: 'comment', headerName: 'Комментарий', minWidth: 250 },
 ];
@@ -84,11 +121,11 @@ const DocumentStockList = () => {
     };
 
     return (
-        <div style={{ height: "auto" }} >
-            <Typography variant="h4" gutterBottom component="div">Движения</Typography>
+        <div style={{ height: "auto", flexGrow: 1 }} >
+            <Typography variant="h5" gutterBottom component="div">Движения</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
-                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
+                loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                     autoHeight style={{ width: '100%', marginTop: 5 }}
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }

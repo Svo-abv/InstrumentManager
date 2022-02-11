@@ -153,6 +153,8 @@ const LeftBar = observer(() => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
+                            <MenuItem>{user.user.name}</MenuItem>
+                            <Divider />
                             <MenuItem onClick={handleLogout} >Выйти</MenuItem>
                         </Menu>
                     </div>)
