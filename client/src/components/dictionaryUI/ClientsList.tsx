@@ -10,7 +10,7 @@ import ClientsEditForm from './ClientsEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Номер', minWidth: 100 },
-    { field: 'name', headerName: 'Наименование', minWidth: 250 },
+    { field: 'name', headerName: 'Наименование', minWidth: 500 },
     { field: 'address', headerName: 'Адрес', minWidth: 250 },
     { field: 'tel', headerName: 'Телефон', minWidth: 110 }
 ];

@@ -28,8 +28,11 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { CheckAuthGuard } from './guards/checkauth.guards';
-import { SetMetadata } from "@nestjs/common";
 import { DocumentStockRowsModule } from 'src/documents/documentstock/documentstockrows/documentstockrows.module';
+import { ObjectsModule } from 'src/dictionaries/objects/objects.module';
+import { PersonsModule } from 'src/dictionaries/persons/persons.module';
+import { Objects } from 'src/dictionaries/objects/schemas/objects.entity';
+import { Persons } from 'src/dictionaries/persons/schemas/persons.entity';
 
 @Module({
   controllers: [AppController],
@@ -47,6 +50,7 @@ import { DocumentStockRowsModule } from 'src/documents/documentstock/documentsto
     DocumentStockModule, UnitsModule,
     DocumentStatusModule, DocumentTypesModule,
     DocumentStockRowsModule,
+    ObjectsModule, PersonsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -56,7 +60,7 @@ import { DocumentStockRowsModule } from 'src/documents/documentstock/documentsto
       password: process.env.DB_PWD,
       database: process.env.DB_NAME,
       entities: [Users, Units, Items, Warehouses, Clients, Organizations, DocumentTypes, DocumentStatus, DocumentStock,
-        DocumentStockRows, DocumentPayment, DocumentPaymentRows],
+        DocumentStockRows, DocumentPayment, DocumentPaymentRows, Objects, Persons],
       synchronize: true,
     }),
     AuthModule,

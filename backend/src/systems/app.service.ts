@@ -4,6 +4,7 @@ import { Get, Injectable } from '@nestjs/common';
 export class AppService {
 
     getApi(): any {
+
         return { message: 'hello toto' };
     }
 

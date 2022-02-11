@@ -9,15 +9,15 @@ import DeleteAlertDialog from '../DeleteAlertDialog';
 import DocStockEditForm from './DocStockEditForm';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'Код', minWidth: 100 },
+    { field: 'id', headerName: 'Код', width: 70 },
     { field: 'num', headerName: 'Номер', minWidth: 100 },
     { field: 'status', headerName: 'Статус', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.status.name}` || '') },
-    { field: 'date', type: "date", headerName: 'Дата', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${new Date(params.row.date).toLocaleString()}` || '') },
-    { field: 'type', headerName: 'Тип', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
+    { field: 'date', type: "date", headerName: 'Дата', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${new Date(params.row.date).toLocaleString()}` || '') },
+    { field: 'type', headerName: 'Тип', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${params.row.type.name}` || '') },
     { field: 'warehouse', headerName: 'Склад', minWidth: 100, valueGetter: (params: GridValueGetterParams) => (`${params.row.warehouse.name}` || '') },
     { field: 'organization', headerName: 'Организация', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.organization.name}` || '') },
-    { field: 'client', headerName: 'Клиент', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
-    { field: 'user', headerName: 'Пользователь', minWidth: 200, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
+    { field: 'client', headerName: 'Клиент', minWidth: 180, valueGetter: (params: GridValueGetterParams) => (`${params.row.client.name}` || '') },
+    { field: 'user', headerName: 'Пользователь', minWidth: 150, valueGetter: (params: GridValueGetterParams) => (`${params.row.user.name}` || '') },
     { field: 'summ', type: "number", headerName: 'Сумма', minWidth: 100 },
     { field: 'comment', headerName: 'Комментарий', minWidth: 250 },
 ];

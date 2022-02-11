@@ -1,7 +1,6 @@
 import { Clients } from "src/dictionaries/clients/schemas/clients.entity";
 import { Organizations } from "src/dictionaries/organizations/schemas/organizations.entity";
 import { Users } from "src/dictionaries/users/schemas/users.entity";
-import { Warehouses } from "src/dictionaries/warehouses/schemas/warehouses.entity";
 import { DocumentStatus } from "src/documents/documentstatus/schemas/documentstatus.entity";
 import { DocumentTypes } from "src/documents/documenttypes/schemas/documenttypes.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -12,7 +11,7 @@ export class DocumentPayment {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ default: null })
     statusId: number;
 
     @Column()
@@ -21,17 +20,17 @@ export class DocumentPayment {
     @Column({ type: 'datetime' })
     date: string;
 
-    @Column()
+    @Column({ default: null })
     typeId: number;
 
-    @Column()
+    @Column({ default: null })
     organizationId: number;
 
-    @Column()
+    @Column({ default: null })
     clientId: number;
 
 
-    @Column()
+    @Column({ default: null })
     userId: number;
 
     @Column()

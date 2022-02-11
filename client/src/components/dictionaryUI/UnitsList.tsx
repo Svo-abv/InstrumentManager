@@ -10,7 +10,7 @@ import UnitsEditForm from './UnitsEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Номер', minWidth: 100 },
-    { field: 'name', headerName: 'Наименование', minWidth: 250 }
+    { field: 'name', headerName: 'Наименование', minWidth: 500 }
 ];
 
 const UnitsList = () => {

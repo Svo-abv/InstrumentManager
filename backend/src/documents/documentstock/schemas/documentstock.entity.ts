@@ -1,5 +1,7 @@
 import { Clients } from "src/dictionaries/clients/schemas/clients.entity";
+import { Objects } from "src/dictionaries/objects/schemas/objects.entity";
 import { Organizations } from "src/dictionaries/organizations/schemas/organizations.entity";
+import { Persons } from "src/dictionaries/persons/schemas/persons.entity";
 import { Users } from "src/dictionaries/users/schemas/users.entity";
 import { Warehouses } from "src/dictionaries/warehouses/schemas/warehouses.entity";
 import { DocumentStatus } from "src/documents/documentstatus/schemas/documentstatus.entity";
@@ -12,7 +14,7 @@ export class DocumentStock {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ default: null })
     statusId: number;
 
     @Column()
@@ -21,21 +23,26 @@ export class DocumentStock {
     @Column({ type: 'timestamp' })
     date: Date;
 
-    @Column()
+    @Column({ default: null })
     typeId: number;
 
-    @Column()
+    @Column({ default: null })
     warehouseId: number;
 
-    @Column()
+    @Column({ default: null })
     organizationId: number;
 
-    @Column()
+    @Column({ default: null })
     clientId: number;
 
+    @Column({ default: null })
+    objectId: number;
 
-    @Column()
+    @Column({ default: null })
     userId: number;
+
+    @Column({ default: null })
+    personId: number;
 
     @Column()
     summ: number;
@@ -58,8 +65,14 @@ export class DocumentStock {
     @ManyToOne(type => Clients, client => client.id)
     client: Clients;
 
+    @ManyToOne(type => Objects, object => object.id)
+    object: Objects;
+
     @ManyToOne(type => Users, user => user.id)
     user: Users;
+
+    @ManyToOne(type => Persons, person => person.id)
+    person: Persons;
 
     @OneToMany(type => DocumentStockRows, rows => rows.documentId)
     doc: DocumentStockRows[];

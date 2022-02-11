@@ -1,22 +1,19 @@
 import { Typography } from '@mui/material';
-import { GridColDef, DataGrid, GridCallbackDetails, GridRowParams, MuiEvent } from '@mui/x-data-grid';
-import { useSnackbar } from 'notistack';
+import { GridColDef, DataGrid, GridRowParams, MuiEvent, GridCallbackDetails } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
-import { createOrgApi, deleteOrgByIdApi, getAllOrgApi, updateOrgByIdApi } from '../../httpApi/OrganizationsApi';
+import { createObjectsApi, deleteObjectsByIdApi, getAllObjectsApi, updateObjectsByIdApi } from '../../httpApi/ObjectsApi';
 import ActionsPanel from '../ActionsPanel';
 import DeleteAlertDialog from '../DeleteAlertDialog';
 import SpinnerItem from '../SpinnerItem';
-import OrgEditForm from './OrgEditForm';
+import { useSnackbar } from 'notistack';
+import ObjectsEditForm from './ObjectsEditForm';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'Номер', minWidth: 100 },
-    { field: 'name', headerName: 'Наименование', minWidth: 500 },
-    { field: 'address', headerName: 'Адрес', minWidth: 250 },
-    { field: 'inn', headerName: 'ИНН', minWidth: 110 },
-    { field: 'kpp', headerName: 'КПП', minWidth: 110 }
+    { field: 'name', headerName: 'Наименование', minWidth: 500 }
 ];
 
-const OrganizationList = () => {
+const ObjectsList = () => {
 
     const { enqueueSnackbar } = useSnackbar();
     const [rows, setRows] = useState<any>();
@@ -28,7 +25,7 @@ const OrganizationList = () => {
     const [isEditOperation, setIsEditOperation] = useState(false);
 
     useEffect(() => {
-        getAllOrgApi().then((data) => {
+        getAllObjectsApi().then((data: any) => {
             setRows(data);
             setLoading(false);
         });
@@ -54,8 +51,8 @@ const OrganizationList = () => {
         setAlertIsOpen(false);
         setLoading(true);
 
-        deleteOrgByIdApi(currRow).then(() => {
-            getAllOrgApi().then((data) => {
+        deleteObjectsByIdApi(currRow).then(() => {
+            getAllObjectsApi().then((data: any) => {
                 setRows(data)
                 enqueueSnackbar('Операция выполнена успешно!', { variant: 'success' });
             });
@@ -67,8 +64,8 @@ const OrganizationList = () => {
         setEditFormIsOpen(false);
         setLoading(true);
 
-        (isEditOperation ? updateOrgByIdApi(d) : createOrgApi(d)).then(() => {
-            getAllOrgApi().then((data: any) => {
+        (isEditOperation ? updateObjectsByIdApi(d) : createObjectsApi(d)).then(() => {
+            getAllObjectsApi().then((data: any) => {
                 setRows(data)
                 enqueueSnackbar('Операция выполнена успешно!', { variant: 'success' });
             });
@@ -76,9 +73,10 @@ const OrganizationList = () => {
             setLoading(false);
         });
     };
+
     return (
         <div style={{ height: "auto" }} >
-            <Typography variant="h4" gutterBottom component="div">Организации</Typography>
+            <Typography variant="h4" gutterBottom component="div">Объекты</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid onRowClick={getRowIdGetter}
@@ -86,9 +84,9 @@ const OrganizationList = () => {
                     rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
-            {editFormIsOpen && (<OrgEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
+            {editFormIsOpen && (<ObjectsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
         </div >
     );
 };
 
-export default OrganizationList;
+export default ObjectsList;
