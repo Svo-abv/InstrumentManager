@@ -8,7 +8,7 @@ import { Clients } from './schemas/clients.entity';
 export class ClientsService {
     constructor(
         @InjectRepository(Clients)
-        private clientsRepository: Repository<Clients>,) { }
+        private clientsRepository: Repository<Clients>) { }
 
     async getAll(): Promise<Clients[]> {
         return await this.clientsRepository.find();

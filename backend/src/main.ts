@@ -1,5 +1,4 @@
-import { SetMetadata } from '@nestjs/common';
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './systems/app.module';
 
@@ -16,4 +15,5 @@ async function startApp() {
 
   await app.listen(process.env.SERVER_API_PORT || 5001).then(() => console.log(`server started, at: ${process.env.SERVER_API_PORT || 5001} port`));
 }
+
 startApp();
