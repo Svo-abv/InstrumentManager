@@ -83,7 +83,7 @@ const OrganizationList = () => {
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                     autoHeight style={{ width: '100%', marginTop: 5 }}
-                    rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
+                    rows={rows} columns={columns} pageSize={15} rowsPerPageOptions={[5, 15, 100]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
             {editFormIsOpen && (<OrgEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}

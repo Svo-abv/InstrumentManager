@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { GridColDef, DataGrid, GridRowParams, MuiEvent, GridCallbackDetails } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { createUnitsApi, deleteUnitsByIdApi, getAllUnitsApi, updateUnitsByIdApi } from '../../httpApi/UnitsApi';
@@ -75,17 +75,17 @@ const UnitsList = () => {
     };
 
     return (
-        <div style={{ height: "auto" }} >
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h5" gutterBottom component="div">Единицы измерения</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                     autoHeight style={{ width: '100%', marginTop: 5 }}
-                    rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
+                    rows={rows} columns={columns} pageSize={15} rowsPerPageOptions={[5, 15, 100]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
             {editFormIsOpen && (<UnitsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
-        </div >
+        </Paper>
     );
 };
 

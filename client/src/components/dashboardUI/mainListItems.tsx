@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import { Context } from '../..';
 import { documentsMenuElements } from '../../utils/constants';
 import { IMenuElements } from '../../types/types';
+import MainInformation from './MainInformation';
 
 const MainListItems = observer(() => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -29,7 +30,10 @@ const MainListItems = observer(() => {
         <List>
             <ListItemButton
                 selected={selectedIndex === 0}
-                onClick={(event) => handleListItemClick(event, 0)}>
+                onClick={(event) => {
+                    handleListItemClick(event, 0);
+                    currElement.element = <MainInformation />;
+                }}>
                 <ListItemIcon>
                     <DashboardIcon />
                 </ListItemIcon>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
-import { Toolbar, IconButton, Typography, Divider, Menu, MenuItem } from '@mui/material';
+import { Toolbar, IconButton, Typography, Divider, Menu, MenuItem, ListItemIcon } from '@mui/material';
 import MainListItems from './mainListItems';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,6 +12,8 @@ import { AccountCircle } from '@mui/icons-material';
 import { Context } from '../..';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react';
+import Logout from '@mui/icons-material/Logout';
+import Settings from '@mui/icons-material/Settings';
 
 const drawerWidth: number = 270;
 
@@ -153,9 +155,18 @@ const LeftBar = observer(() => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem>{user.user.name}</MenuItem>
+                            <MenuItem>
+                                <ListItemIcon>
+                                    <Settings fontSize="small" />
+                                </ListItemIcon>
+                                {user.user.name}</MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleLogout} >Выйти</MenuItem>
+                            <MenuItem onClick={handleLogout} >
+                                <ListItemIcon>
+                                    <Logout fontSize="small" />
+                                </ListItemIcon>
+                                Выйти
+                            </MenuItem>
                         </Menu>
                     </div>)
                     }

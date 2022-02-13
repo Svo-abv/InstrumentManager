@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid';
 import { useSnackbar } from 'notistack';
 import React, { useEffect, useState } from 'react';
@@ -77,17 +77,17 @@ const ItemsList = () => {
         });
     };
     return (
-        <div style={{ height: "auto" }} >
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h5" gutterBottom component="div">Номенклатура</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter} autoHeight
                     style={{ width: '100%', marginTop: 5 }}
-                    rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
+                    rows={rows} columns={columns} pageSize={15} rowsPerPageOptions={[5, 15, 100]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
             {editFormIsOpen && (<ItemsEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
-        </div >
+        </Paper>
     );
 
 };

@@ -1,8 +1,7 @@
-import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AuthUserDto, RegUserDto } from './dto/users.dto';
+import { RegUserDto } from './dto/users.dto';
 import { Users } from './schemas/users.entity';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from 'src/systems/auth/auth.service';
@@ -24,8 +23,8 @@ export class UsersService {
         if (!result) {
             throw new HttpException("Пользователь ненайден!", HttpStatus.BAD_REQUEST);
         }
-        const hsh = await bcrypt.compare(result.password, dto.password);
-        if (hsh)
+        const hsh = await bcrypt.compare(dto.password, result.password);
+        if (!hsh)
             throw new HttpException("Пароль не верен!", HttpStatus.BAD_REQUEST);
 
         return this.authService.sign({ id: result.id, name: result.name, role: result.role });

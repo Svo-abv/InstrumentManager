@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ActionsPanel from '../ActionsPanel';
 import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid';
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { createDocStockApi, deleteDocStockByIdApi, getAllDocStockApi, updateDocStockByIdApi } from '../../httpApi/DocumentStockApi';
 import SpinnerItem from '../SpinnerItem';
 import { useSnackbar } from 'notistack';
@@ -121,17 +121,17 @@ const DocumentStockList = () => {
     };
 
     return (
-        <div style={{ height: "auto", flexGrow: 1 }} >
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h5" gutterBottom component="div">Движения</Typography>
             <ActionsPanel OnClickAdd={addHandler} OnClickEdit={editHandler} OnClickDelete={() => setAlertIsOpen(true)} />
             {
                 loading ? <SpinnerItem top={'50px'} /> : (<DataGrid showColumnRightBorder showCellRightBorder density="compact" onRowClick={getRowIdGetter}
                     autoHeight style={{ width: '100%', marginTop: 5 }}
-                    rows={rows} columns={columns} pageSize={5} rowsPerPageOptions={[5]} />)
+                    rows={rows} columns={columns} pageSize={15} rowsPerPageOptions={[5, 15, 100]} />)
             }
             {alertIsOpen && (<DeleteAlertDialog isOpen={alertIsOpen} handleClouse={() => setAlertIsOpen(false)} handleAccept={alertAcceptCallback} />)}
             {editFormIsOpen && (<DocStockEditForm id={currRow} isOpen={editFormIsOpen} isEdit={isEditOperation} handleClouse={() => setEditFormIsOpen(false)} handleAccept={editAcceptCallback} />)}
-        </div >
+        </Paper >
     );
 };
 
